@@ -1,0 +1,25 @@
+﻿
+@if (User.Identity.IsAuthenticated)
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="User" asp-action="Create" asp-controller="Siparis">Sipariş Ekle</a>
+    </li class="nav-item">
+    @if (User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-action="Index" asp-controller="Menu" asp-area="Admin">Admin Panel</a>
+        </li class="nav-item">
+    }
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-action="Logout" asp-controller="User">Çıkış Yap</a>
+    </li class="nav-item">
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-action="Login" asp-controller="User">Giriş Yap</a>
+    </li class="nav-item">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-action="Register" asp-controller="User">Kayıt Ol</a>
+    </li class="nav-item">
+}
