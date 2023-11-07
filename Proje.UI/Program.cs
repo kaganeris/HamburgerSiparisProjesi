@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Proje.BLL.AutoMapper;
 using Proje.BLL.Services.Abstract;
 using Proje.BLL.Services.Concrete;
 using Proje.DAL.Context;
 using Proje.DAL.Repositories;
 using Proje.DATA.Entities;
 using Proje.DATA.Repositories;
+using Proje.UI.Models.SeedData;
 
 namespace Proje.UI
 {
@@ -16,17 +18,24 @@ namespace Proje.UI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr"));
             });
 
+            builder.Services.AddAutoMapper(typeof(MapProfile));
+
             builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
+            builder.Services.AddTransient(typeof(IMenuService),typeof(MenuService));
+
+            builder.Services.AddAutoMapper(typeof(MenuMapProfile));
+
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
@@ -35,6 +44,7 @@ namespace Proje.UI
                 options.LogoutPath = "/User/Logout";
 
                 options.LoginPath = "/User/Login";
+
             });
 
             builder.Services.Configure<IdentityOptions>(options =>
@@ -69,6 +79,8 @@ namespace Proje.UI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            DataSeeder.Seed(app);
 
             app.UseEndpoints(endpoints =>
             {
