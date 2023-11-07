@@ -18,17 +18,22 @@ namespace Proje.UI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr"));
             });
 
+            builder.Services.AddAutoMapper(typeof(MapProfile));
+
             builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
+            builder.Services.AddTransient(typeof(IMenuService),typeof(MenuService));
+
+            builder.Services.AddAutoMapper(typeof(MenuMapProfile));
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 

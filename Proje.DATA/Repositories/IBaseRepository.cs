@@ -17,6 +17,7 @@ namespace Proje.DATA.Repositories
         bool Update(T item);
         List<T> GetAll();
         T GetWhere(Expression<Func<T, bool>> exp);
+        List<T> GetWhereAll(Expression<Func<T, bool>> exp);
         int Save();
     }
 }
