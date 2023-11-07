@@ -60,6 +60,11 @@ namespace Proje.BLL.Services.Concrete
             return baseRepository.GetWhere(exp);
         }
 
+        public List<T> GetWhereAll(Expression<Func<T, bool>> exp)
+        {
+            return baseRepository.GetWhereAll(exp);
+        }
+
         public bool Update(T item)
         {
             if (item == null)

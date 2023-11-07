@@ -15,7 +15,6 @@ namespace Proje.DATA.Entities
         }
         public string Adi { get; set; }
         public decimal Fiyat { get; set; }
-        public Boyut Boyut { get; set; }
         public List<SiparislerMenuler> SiparislerMenuler { get; set; }
     }
 }
