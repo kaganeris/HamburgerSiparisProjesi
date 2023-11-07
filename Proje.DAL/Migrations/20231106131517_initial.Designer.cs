@@ -12,8 +12,8 @@ using Proje.DAL.Context;
 namespace Proje.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231106093230_init")]
-    partial class init
+    [Migration("20231106131517_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -300,9 +300,6 @@ namespace Proje.DAL.Migrations
                     b.Property<bool>("AktifMi")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Boyut")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
@@ -333,6 +330,9 @@ namespace Proje.DAL.Migrations
 
                     b.Property<bool>("AktifMi")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Boyut")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("GuncellemeZamani")
                         .HasColumnType("datetime2");
