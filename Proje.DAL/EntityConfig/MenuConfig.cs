@@ -16,8 +16,6 @@ namespace Proje.DAL.EntityConfig
             base.Configure(builder);
 
             builder.Property(x => x.Adi).IsRequired().HasMaxLength(30);
-
-            builder.Property(x => x.Boyut).IsRequired();
         }
     }
 }
