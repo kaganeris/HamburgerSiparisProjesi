@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MessagePack;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proje.BLL.Models.DTOs.ExtraMalzeme;
 using Proje.BLL.Services.Abstract;
@@ -10,6 +11,7 @@ using Proje.DATA.Entities;
 namespace Proje.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ExtraMalzemeController : Controller
     {
         private readonly IBaseService<ExtraMalzeme> _service;

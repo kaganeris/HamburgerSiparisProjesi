@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Proje.BLL.Models.DTOs.Menu;
+using Proje.BLL.Models.DTOs.MenuDTOs;
 using Proje.BLL.Services.Abstract;
 using Proje.DATA.Entities;
 
 namespace Proje.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class MenuController : Controller
     {
         private readonly BLL.Services.Abstract.IMenuService _service;

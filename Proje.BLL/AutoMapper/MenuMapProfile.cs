@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Proje.BLL.Models.DTOs.Menu;
+using Proje.BLL.Models.DTOs.MenuDTOs;
 using Proje.DATA.Entities;
 using System;
 using System.Collections.Generic;
