@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Proje.BLL.AutoMapper;
 using Proje.BLL.Services.Abstract;
 using Proje.BLL.Services.Concrete;
 using Proje.DAL.Context;
 using Proje.DAL.Repositories;
 using Proje.DATA.Entities;
 using Proje.DATA.Repositories;
+using Proje.UI.Models.SeedData;
 
 namespace Proje.UI
 {
@@ -28,6 +30,8 @@ namespace Proje.UI
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
 
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/User/Login";
@@ -35,6 +39,7 @@ namespace Proje.UI
                 options.LogoutPath = "/User/Logout";
 
                 options.LoginPath = "/User/Login";
+
             });
 
             builder.Services.Configure<IdentityOptions>(options =>
@@ -69,6 +74,8 @@ namespace Proje.UI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            DataSeeder.Seed(app);
 
             app.UseEndpoints(endpoints =>
             {
