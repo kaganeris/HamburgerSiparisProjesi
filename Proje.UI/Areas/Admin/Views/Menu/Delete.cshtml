@@ -1,0 +1,29 @@
+﻿@model Proje.DATA.Entities.Menu
+
+
+
+<h4>Menü Silme Ekranı</h4>
+
+
+<h3>Aşağıdaki menüyü silmek istediğinize emin misiniz?</h3>
+
+
+<div class="row">
+        <form asp-action="Delete" method="post">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label name="Adi" class="control-label">Menü Adi</label>
+            <input name="Adi" asp-for="@Model.Adi" id="Adi" readonly="true" class="form-control" />
+            <input type="hidden" asp-for="@Model.Fiyat" value="@Model.Fiyat" />
+            <input type="hidden" asp-for="@Model.GuncellemeZamani" value="@Model.GuncellemeZamani" />
+            <input type="hidden" asp-for="@Model.OlusturmaZamani" value="@Model.OlusturmaZamani" />
+            
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-outline-dark">Sil</button>
+    </div>
+    </form>
+</div>

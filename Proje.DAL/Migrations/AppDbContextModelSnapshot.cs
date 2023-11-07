@@ -298,9 +298,6 @@ namespace Proje.DAL.Migrations
                     b.Property<bool>("AktifMi")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Boyut")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
@@ -331,6 +328,9 @@ namespace Proje.DAL.Migrations
 
                     b.Property<bool>("AktifMi")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Boyut")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("GuncellemeZamani")
                         .HasColumnType("datetime2");

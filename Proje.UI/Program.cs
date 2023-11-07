@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Proje.BLL.AutoMapper;
 using Proje.BLL.Services.Abstract;
 using Proje.BLL.Services.Concrete;
 using Proje.DAL.Context;
@@ -27,6 +28,9 @@ namespace Proje.UI
 
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
+            builder.Services.AddTransient(typeof(IMenuService),typeof(MenuService));
+
+            builder.Services.AddAutoMapper(typeof(MenuMapProfile));
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
