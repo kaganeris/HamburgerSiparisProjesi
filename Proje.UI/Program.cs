@@ -24,7 +24,7 @@ namespace Proje.UI
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr"));
             });
-
+            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
             builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));

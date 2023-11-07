@@ -253,13 +253,13 @@ namespace Proje.DAL.Migrations
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("GuncellemeZamani")
+                    b.Property<DateTime?>("GuncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OlusturmaZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("SilinmeZamani")
+                    b.Property<DateTime?>("SilinmeZamani")
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
@@ -301,13 +301,13 @@ namespace Proje.DAL.Migrations
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("GuncellemeZamani")
+                    b.Property<DateTime?>("GuncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OlusturmaZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("SilinmeZamani")
+                    b.Property<DateTime?>("SilinmeZamani")
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
@@ -332,13 +332,13 @@ namespace Proje.DAL.Migrations
                     b.Property<int>("Boyut")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("GuncellemeZamani")
+                    b.Property<DateTime?>("GuncellemeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OlusturmaZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("SilinmeZamani")
+                    b.Property<DateTime?>("SilinmeZamani")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserID")

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Proje.BLL.Models.DTOs;
+using Proje.BLL.Services.Concrete;
 using Proje.DATA.Entities;
 using Proje.DATA.Repositories;
 
@@ -9,26 +10,33 @@ namespace Proje.UI.Areas.User.Controllers
     public class SiparisController : Controller
     {
         private readonly IBaseRepository<Menu> baseRepository;
+        SiparisOlusturDTO siparisOlusturDTO;
+        MenuService menuService;
         public SiparisController(IBaseRepository<Menu> baseRepository)
         {
+            menuService = new(baseRepository);
             this.baseRepository = baseRepository;
+            siparisOlusturDTO = new();
+            siparisOlusturDTO.Menuler = menuService.GetAll();
         }
-        public IActionResult SiparisOlustur(int userID)
+        public IActionResult SiparisOlustur()
         {
-            SiparisOlusturDTO siparisOlusturDTO = new(baseRepository)
-            {
-                UserID = userID,
-            };
             return View(siparisOlusturDTO);
         }
+
         [HttpPost]
-        public IActionResult SiparisOlustur(SiparisOlusturDTO siparisOlusturDTO)
+        public IActionResult SiparisOlustur(SiparisGonderDTO siparisGonderDTO)
         {
+            siparisOlusturDTO.gonderilenSiparisler.Add(siparisGonderDTO);
             return View(siparisOlusturDTO);
         }
-        public IActionResult deneme()
+
+        [HttpPost]
+        public IActionResult SiparisGonder(SiparisGonderDTO siparisGonderDTO)
         {
-            return PartialView("_SiparisListesi");
+            siparisGonderDTO.MenuAdi = menuService.GetById(siparisGonderDTO.MenuID).Adi; //view içinde yapmaya çalış
+            siparisOlusturDTO.gonderilenSiparisler.Add(siparisGonderDTO);
+            return PartialView("_SiparisListesi",siparisOlusturDTO);
         }
 
     }
