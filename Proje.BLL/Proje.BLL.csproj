@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+
+    <Folder Include="AutoMapper\" />
+
+
     <Folder Include="Models\VMs\" />
   </ItemGroup>
 
