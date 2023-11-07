@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace Proje.BLL.Services.Concrete
 {
-    public class MenuService : BaseService<Menu> , IMenuService
+    public class MenuService : BaseService<Menu>, IMenuService
     {
-        private readonly IBaseRepository<Menu> baseRepository;
+        private readonly IBaseRepository<Menu> _baseRepository;
 
         public MenuService(IBaseRepository<Menu> baseRepository) : base(baseRepository)
         {
-            this.baseRepository = baseRepository;
+            _baseRepository = baseRepository;
+
         }
     }
 }

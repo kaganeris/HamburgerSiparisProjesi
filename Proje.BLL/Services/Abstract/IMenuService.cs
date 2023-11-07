@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace Proje.BLL.Services.Abstract
 {
-    public interface IMenuService :IBaseService<Menu>
+
+    public interface IMenuService : IBaseService<Menu>
+
     {
     }
 }
