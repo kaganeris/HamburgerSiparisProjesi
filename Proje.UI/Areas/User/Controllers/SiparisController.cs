@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Proje.BLL.Models.DTOs;
 using Proje.DATA.Entities;
 using Proje.DATA.Repositories;
+using System.Data;
 
 namespace Proje.UI.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize(Roles = "Musteri")]
     public class SiparisController : Controller
     {
         private readonly IBaseRepository<Menu> baseRepository;
