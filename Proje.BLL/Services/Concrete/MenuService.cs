@@ -16,6 +16,7 @@ namespace Proje.BLL.Services.Concrete
         public MenuService(IBaseRepository<Menu> baseRepository) : base(baseRepository)
         {
             _baseRepository = baseRepository;
+
         }
     }
 }

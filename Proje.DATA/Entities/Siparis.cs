@@ -17,7 +17,7 @@ namespace Proje.DATA.Entities
         }
         public string UserID { get; set; }
         public int Adet { get; set; }
-        public Boyut  Boyut { get; set; }
+        public Boyut Boyut { get; set; }
         public List<SiparislerMenuler> SiparislerMenuler { get; set; }
         public List<ExtraMalzemelerSiparisler> ExtraMalzemelerSiparisler { get; set; }
         public AppUser AppUser { get; set; }
