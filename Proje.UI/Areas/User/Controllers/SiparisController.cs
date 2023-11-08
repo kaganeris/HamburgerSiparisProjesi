@@ -9,7 +9,7 @@ using System.Data;
 namespace Proje.UI.Areas.User.Controllers
 {
     [Area("User")]
-    [Authorize(Roles = "Musteri")]
+    [Authorize(Roles = "Musteri,Admin")]
     public class SiparisController : Controller
     {
         private readonly IBaseRepository<Menu> baseRepository;
