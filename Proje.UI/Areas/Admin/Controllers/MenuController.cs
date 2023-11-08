@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proje.BLL.Models.DTOs.MenuDTOs;
 using Proje.BLL.Services.Abstract;
+using Proje.BLL.Validations.MenuValidate;
 using Proje.DATA.Entities;
 
 namespace Proje.UI.Areas.Admin.Controllers
@@ -19,9 +20,10 @@ namespace Proje.UI.Areas.Admin.Controllers
             _service = service;
             _mapper = mapper;
         }
+        [HttpGet]
         public IActionResult Index()
         {
-            return View(_service.GetAll());
+            return View(_service.GetWhereAll(x => x.AktifMi == true));
         }
 
         public IActionResult Create()
@@ -31,23 +33,55 @@ namespace Proje.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(CreateMenuDTO createMenu)
         {
-            Menu menu=_mapper.Map<Menu>(createMenu);
-            _service.Add(menu);
-            return RedirectToAction("Index");
+            CreateMenuDTOValidator validator = new();
+            var valid=validator.Validate(createMenu);
+            if(valid.IsValid)
+            {
+
+                Menu menu = _mapper.Map<Menu>(createMenu);
+                _service.Add(menu);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var item in valid.Errors)
+                {
+                    ModelState.AddModelError("MenuHata", item.ErrorMessage);
+
+                }
+                return  View();
+            }
+
         }
 
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            return View();
+            UpdateMenuDTO updateMenuDTO=_mapper.Map<UpdateMenuDTO>(_service.GetById(id));
+            return View(updateMenuDTO);
         }
 
         [HttpPost]
         public IActionResult Edit(UpdateMenuDTO updatedMenuDto)
         {
-            Menu updatedMenu = _service.GetById(updatedMenuDto.ID);
-            updatedMenu = _mapper.Map(updatedMenuDto, updatedMenu);
-            _service.Update(updatedMenu);
-            return View();
+            CreateMenuDTOValidator validator = new();
+            var valid = validator.Validate(updatedMenuDto);
+            if (valid.IsValid)
+            {
+                Menu updatedMenu = _service.GetById(updatedMenuDto.ID);
+                updatedMenu = _mapper.Map(updatedMenuDto, updatedMenu);
+                _service.Update(updatedMenu);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach(var item in valid.Errors)
+                {
+                    ModelState.AddModelError("MenuHata", item.ErrorMessage);
+                }
+                return View();
+            }
+
+           
         }
         public IActionResult Delete(int id)
         {
@@ -56,7 +90,7 @@ namespace Proje.UI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(Menu menu)
         {
-            _service.Delete(menu);
+            _service.DeleteById(menu.ID);
             return RedirectToAction("Index");
         }
     }

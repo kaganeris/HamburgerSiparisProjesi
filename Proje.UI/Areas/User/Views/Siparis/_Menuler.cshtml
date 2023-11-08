@@ -1,0 +1,33 @@
+﻿@using Proje.BLL.Models.DTOs;
+@using Proje.DATA.Entities;
+@using Proje.DATA.Enums;
+@model SiparisOlusturDTO
+@{
+	decimal BoyutCarpani = 1;
+	if (Model.Boyut == Boyut.Büyük) BoyutCarpani = 1.4M;
+	else if (Model.Boyut == Boyut.Orta) BoyutCarpani = 1.2M;
+}
+
+<div>
+	<table class="table table-hover table-primary table-striped">
+
+		<tr>
+			<th>Menü Adı</th>
+			<th>Fiyat</th>
+			<th></th>
+		</tr>
+		@foreach (Menu menu in Model.Menuler)
+		{
+			<tr>
+				<td>@menu.Adi</td>
+				@{
+					decimal fiyat = menu.Fiyat * BoyutCarpani;
+				}
+				<td>@fiyat</td>
+				<td>
+					<input type="radio" name="menuID" value="@menu.ID" />
+				</td>
+			</tr>
+		}
+	</table>
+</div>
