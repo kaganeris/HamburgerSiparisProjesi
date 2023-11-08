@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Proje.BLL.Models.DTOs;
 using Proje.BLL.Services.Concrete;
 using Proje.DATA.Entities;
+using Proje.DATA.Enums;
 using Proje.DATA.Repositories;
 using System.Data;
 
@@ -37,9 +38,15 @@ namespace Proje.UI.Areas.User.Controllers
         [HttpPost]
         public IActionResult SiparisGonder(SiparisGonderDTO siparisGonderDTO)
         {
-            siparisGonderDTO.MenuAdi = menuService.GetById(siparisGonderDTO.MenuID).Adi;
-            siparisOlusturDTO.gonderilenSiparisler.Add(siparisGonderDTO);
-            return PartialView("_SiparisListesi",siparisOlusturDTO);
+            Menu menu = menuService.GetById(siparisGonderDTO.MenuID);
+
+			siparisGonderDTO.MenuAdi = menu.Adi;
+            siparisGonderDTO.Fiyat = menu.Fiyat;
+            if (siparisGonderDTO.Boyut == Boyut.Büyük) siparisGonderDTO.Fiyat *= 1.4M;
+            else if (siparisGonderDTO.Boyut == Boyut.Orta) siparisGonderDTO.Fiyat *= 1.2M;
+            siparisGonderDTO.Fiyat *= siparisGonderDTO.Adet;
+
+            return PartialView("_SiparisListesi",siparisGonderDTO);
         }
         [HttpPost]
         public IActionResult BoyutDegistir(SiparisGonderDTO siparisGonderDTO)

@@ -3,7 +3,8 @@
 function SiparisGonder() {
     let SiparisData = {
         MenuID : $("input[type='radio']:checked").val(),
-        Boyut : $("#boyut option:selected").val()
+        Boyut: $("#boyut option:selected").val(),
+        Adet: $('#adet').val()
     }
     $.ajax({
         url: "/User/Siparis/SiparisGonder",
@@ -13,7 +14,7 @@ function SiparisGonder() {
         success: function (response) {
             console.log(response);
 
-            $('#siparisListesi').html(response);
+            $('#siparisListesi').append(response);
         },
         error: function (data) {
             console.log("nbr")
@@ -27,7 +28,7 @@ $('#boyut').change(function () {
         dataType: "html",
         type: "post",
         success: function (response) {
-            $('#menuler').html(response);
+            $('#menuler').html(response)
         }
     });
 });

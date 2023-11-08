@@ -37,12 +37,20 @@
 							<option value="@item">@item.ToString()</option>
 						}
 					</select>
+
+					<input type="number" id="adet"/>
 				</div>
 
 				<button type="button" class="btn btn-outline-secondary" onclick="SiparisGonder()">Sipariş Oluştur</button>
 		</div>
 		<div class="col">
-			<div id="siparisListesi" class="">
+			<div class="">
+				<table class="table table-hover table-success" id="siparisListesi">
+					<tr>
+						<th>Sepetinizdekiler</th>
+						<th>Fiyat</th>
+					</tr>
+				</table>
 			</div>
 		</div>
 		

@@ -13,5 +13,7 @@ namespace Proje.BLL.Models.DTOs
         public int MenuID { get; set; }
         public Boyut Boyut { get; set; }
         public string MenuAdi { get; set; }
+        public decimal Fiyat { get; set; }
+        public int Adet { get; set; }
     }
 }
