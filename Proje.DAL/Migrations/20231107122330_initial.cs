@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Proje.DAL.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,8 +61,8 @@ namespace Proje.DAL.Migrations
                     Adi = table.Column<string>(type: "nvarchar(65)", maxLength: 65, nullable: false),
                     Fiyat = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     OlusturmaZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GuncellemeZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SilinmeZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GuncellemeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SilinmeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AktifMi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -79,8 +79,8 @@ namespace Proje.DAL.Migrations
                     Adi = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Fiyat = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     OlusturmaZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GuncellemeZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SilinmeZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GuncellemeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SilinmeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AktifMi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -204,8 +204,8 @@ namespace Proje.DAL.Migrations
                     Adet = table.Column<int>(type: "int", nullable: false),
                     Boyut = table.Column<int>(type: "int", nullable: false),
                     OlusturmaZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GuncellemeZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SilinmeZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GuncellemeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SilinmeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AktifMi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

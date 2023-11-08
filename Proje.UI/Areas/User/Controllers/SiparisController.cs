@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Proje.BLL.Models.DTOs;
+using Proje.BLL.Services.Concrete;
 using Proje.DATA.Entities;
 using Proje.DATA.Repositories;
 
@@ -9,27 +10,42 @@ namespace Proje.UI.Areas.User.Controllers
     public class SiparisController : Controller
     {
         private readonly IBaseRepository<Menu> baseRepository;
+        SiparisOlusturDTO siparisOlusturDTO;
+        MenuService menuService;
         public SiparisController(IBaseRepository<Menu> baseRepository)
         {
+            menuService = new(baseRepository);
             this.baseRepository = baseRepository;
+            siparisOlusturDTO = new();
+            siparisOlusturDTO.Menuler = menuService.GetAll();
         }
-        public IActionResult SiparisOlustur(int userID)
+        public IActionResult SiparisOlustur()
         {
-            SiparisOlusturDTO siparisOlusturDTO = new(baseRepository)
-            {
-                UserID = userID,
-            };
             return View(siparisOlusturDTO);
+        }
+
+        [HttpPost]
+        public IActionResult SiparisOlustur(SiparisGonderDTO siparisGonderDTO)
+        {
+            siparisOlusturDTO.gonderilenSiparisler.Add(siparisGonderDTO);
+            return View(siparisOlusturDTO);
+        }
+
+        [HttpPost]
+        public IActionResult SiparisGonder(SiparisGonderDTO siparisGonderDTO)
+        {
+            siparisGonderDTO.MenuAdi = menuService.GetById(siparisGonderDTO.MenuID).Adi;
+            siparisOlusturDTO.gonderilenSiparisler.Add(siparisGonderDTO);
+            return PartialView("_SiparisListesi",siparisOlusturDTO);
         }
         [HttpPost]
-        public IActionResult SiparisOlustur(SiparisOlusturDTO siparisOlusturDTO)
+        public IActionResult BoyutDegistir(SiparisGonderDTO siparisGonderDTO)
         {
-            return View(siparisOlusturDTO);
+            siparisOlusturDTO.Boyut = siparisGonderDTO.Boyut;
+            return PartialView("_Menuler",siparisOlusturDTO);
         }
-        public IActionResult deneme()
-        {
-            return PartialView("_SiparisListesi");
-        }
+
+
 
     }
 }

@@ -2,26 +2,33 @@
 
 function SiparisGonder() {
     let SiparisData = {
-        MenuID = $("input[type='radio']:checked").val(),
-        Boyut = $("#boyut option:selected").val()
+        MenuID : $("input[type='radio']:checked").val(),
+        Boyut : $("#boyut option:selected").val()
     }
     $.ajax({
-        url: "/Siparis/SiparisOlustur",
+        url: "/User/Siparis/SiparisGonder",
         type: "POST",
-        dataType: "json",
+        dataType: "html",
         data: SiparisData,
-        success: function (data) {
-            console.log(SiparisData)
-        }
-    })
-}
-
-function Deneme() {
-    $.ajax({
-        url: "/Siparis/deneme",
-        type: "GET",
         success: function (response) {
-            $(#siparisListesi).html(response);
+            console.log(response);
+
+            $('#siparisListesi').html(response);
+        },
+        error: function (data) {
+            console.log("nbr")
         }
     })
 }
+$('#boyut').change(function () {
+    $.ajax({
+        url: "/User/Siparis/BoyutDegistir",
+        data: { Boyut: $("#boyut option:selected").val() },
+        dataType: "html",
+        type: "post",
+        success: function (response) {
+            $('#menuler').html(response);
+        }
+    });
+});
+
