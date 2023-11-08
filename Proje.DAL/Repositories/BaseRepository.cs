@@ -87,6 +87,11 @@ namespace Proje.DAL.Repositories
             return context.Set<T>().Where(exp).FirstOrDefault();
         }
 
+        public List<T> GetWhereAll(Expression<Func<T, bool>> exp)
+        {
+            return context.Set<T>().Where(exp).ToList();
+        }
+
         public int Save()
         {
             return context.SaveChanges();

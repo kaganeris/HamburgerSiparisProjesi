@@ -1,0 +1,44 @@
+﻿@using Proje.DATA.Entities;
+@using Proje.DATA.Enums;
+@using Proje.UI.Areas.Admin.Controllers
+@model List<Menu>
+
+
+
+<h1>Menüler</h1>
+
+<div class="row">
+
+
+    <table class="table table-hover table-primary table-striped">
+         
+        @{
+            int counter = 1;
+        }
+
+        @{
+            foreach (Menu menu in Model)
+        {
+            <tr>
+                <form asp-action="Index">
+                    <td>@counter</td>
+                    
+                    <td>@menu.Adi</td>
+                    <td>@menu.Fiyat</td>
+
+
+                <td>
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@menu.ID"> Details</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@menu.ID"> Delete</a>
+                </td>
+                    
+
+
+                </form>
+            </tr>
+                counter++;
+        }
+        }
+    </table>
+
+</div>

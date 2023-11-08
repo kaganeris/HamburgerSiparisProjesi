@@ -95,5 +95,11 @@ namespace Proje.UI.Controllers
             return View();
             
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
