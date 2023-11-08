@@ -4,18 +4,54 @@
 @model SiparisOlusturDTO
 
 @{
-    ViewData["Title"] = "SiparisOlustur";
+	ViewData["Title"] = "SiparisOlustur";
 }
 
-<h1>sipariş</h1>
-<div class="menuler">
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div id="menuler">
+				<table class="table table-hover table-primary table-striped">
 
-    <button type="button" class="btn btn-outline-secondary" id="" onclick="SiparisGonder()">Sipariş Oluştur</button>
+					<tr>
+						<th>Menü Adı</th>
+						<th>Fiyat</th>
+						<th></th>
+					</tr>
+					@foreach (Menu menu in Model.Menuler)
+					{
+						<tr>
+							<td>@menu.Adi</td>
+							<td>@menu.Fiyat</td>
+							<td>
+								<input type="radio" name="menuID" value="@menu.ID" />
+							</td>
+						</tr>
+					}
+				</table>
+			</div>
+				<div>
+					<select id="boyut">
+						@foreach (var item in Enum.GetValues(typeof(Boyut)))
+						{
+							<option value="@item">@item.ToString()</option>
+						}
+					</select>
+				</div>
+
+				<button type="button" class="btn btn-outline-secondary" onclick="SiparisGonder()">Sipariş Oluştur</button>
+		</div>
+		<div class="col">
+			<div id="siparisListesi" class="">
+			</div>
+		</div>
+		
+
+		
+	</div>
+
 </div>
 
-<div id="siparisListesi">
-    <button type="button" class="btn btn-outline-secondary" id="" onclick="Deneme()">deneme</button>
-</div>
 
 
 
