@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using Proje.DATA.Entities;
+@inject UserManager<AppUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+	AppUser user = await UserManager.GetUserAsync(User);
+}
+<link rel="stylesheet" type="text/css" href="~/template/profilecss/core.css" />
+<link rel="stylesheet"
+	  type="text/css"
+	  href="~/template/profilecss/icon-font.min.css" />
+<link rel="stylesheet"
+	  type="text/css"
+	  href="~/template/profilecss/cropper.css" />
+<link rel="stylesheet" type="text/css" href="~/template/profilecss/style.css" />
+
+<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-30 offset-3">
+	<div class="pd-20 card-box height-100-p">
+		<h5 class="text-center h5 mb-0">@user.Ad @user.Soyad</h5>
+		<p class="text-center text-muted font-14">
+			@foreach (var item in await UserManager.GetRolesAsync(user))
+			{
+				<span>@item</span>
+			}
+		</p>
+		<div class="profile-info">
+			<h5 class="mb-20 h5 text-blue">İletişim Bilgileri</h5>
+			<ul>
+				<li>
+					<span>Email Adresi:</span>
+					@user.Email
+				</li>
+				<li>
+					<span>Telefon Numarası:</span>
+					@user.PhoneNumber
+				</li>
+				<li>
+					<span>Cinsiyet:</span>
+					@user.Cinsiyet
+				</li>
+				<li>
+					<span>Doğum Tarihi:</span>
+					@user.DogumTarihi.ToShortDateString()
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
