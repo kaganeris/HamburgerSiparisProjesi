@@ -34,10 +34,18 @@ namespace Proje.UI.Areas.User.Controllers
         [HttpPost]
         public IActionResult SiparisGonder(SiparisGonderDTO siparisGonderDTO)
         {
-            siparisGonderDTO.MenuAdi = menuService.GetById(siparisGonderDTO.MenuID).Adi; //view içinde yapmaya çalış
+            siparisGonderDTO.MenuAdi = menuService.GetById(siparisGonderDTO.MenuID).Adi;
             siparisOlusturDTO.gonderilenSiparisler.Add(siparisGonderDTO);
             return PartialView("_SiparisListesi",siparisOlusturDTO);
         }
+        [HttpPost]
+        public IActionResult BoyutDegistir(SiparisGonderDTO siparisGonderDTO)
+        {
+            siparisOlusturDTO.Boyut = siparisGonderDTO.Boyut;
+            return PartialView("_Menuler",siparisOlusturDTO);
+        }
+
+
 
     }
 }

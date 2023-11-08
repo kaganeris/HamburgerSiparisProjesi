@@ -20,4 +20,15 @@ function SiparisGonder() {
         }
     })
 }
+$('#boyut').change(function () {
+    $.ajax({
+        url: "/User/Siparis/BoyutDegistir",
+        data: { Boyut: $("#boyut option:selected").val() },
+        dataType: "html",
+        type: "post",
+        success: function (response) {
+            $('#menuler').html(response);
+        }
+    });
+});
 
