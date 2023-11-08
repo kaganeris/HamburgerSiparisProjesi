@@ -12,13 +12,18 @@
 
 
     <table class="table table-hover table-primary table-striped">
-        
+         
+        @{
+            int counter = 1;
+        }
+
         @{
             foreach (Menu menu in Model)
         {
             <tr>
                 <form asp-action="Index">
-                    <td>@menu.ID</td>
+                    <td>@counter</td>
+                    
                     <td>@menu.Adi</td>
                     <td>@menu.Fiyat</td>
 
@@ -32,6 +37,7 @@
 
                 </form>
             </tr>
+                counter++;
         }
         }
     </table>
