@@ -15,14 +15,14 @@
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Kayıt Formu</h3>
                         <form asp-action="Register" asp-controller="User" method="post">
-
+                            <div asp-validation-summary="All" class="bg-danger text-white"></div>
                             <div class="row">
                                 <div class="col-md-6 mb-4">
 
                                     <div class="form-outline">
                                         <label class="form-label" asp-for="UserName">Kullanıcı Adı</label>
                                         <input type="text" asp-for="UserName" class="form-control form-control-lg" />
-                                        <span asp-validation-for="UserName"></span>
+                                        <span asp-validation-for="UserName" class="bg-danger text-white"></span>
                                     </div>
 
                                 </div>
@@ -31,7 +31,7 @@
                                     <div class="form-outline">
                                         <label class="form-label" asp-for="Password">Şifre</label>
                                         <input type="password" asp-for="Password" class="form-control form-control-lg" />
-                                        <span asp-validation-for="Password"></span>
+                                        <span asp-validation-for="Password" class="bg-danger text-white"></span>
                                     </div>
 
                                 </div>
@@ -42,7 +42,7 @@
                                     <div class="form-outline">
                                         <label class="form-label" asp-for="Ad">Ad</label>
                                         <input type="text" asp-for="Ad" class="form-control form-control-lg" />
-                                        <span asp-validation-for="Ad" class="text-danger text-white"></span>
+                                        <span asp-validation-for="Ad" class="bg-danger text-white"></span>
                                     </div>
 
                                 </div>
@@ -51,7 +51,7 @@
                                     <div class="form-outline">
                                         <label class="form-label" asp-for="Soyad">Soyad</label>
                                         <input type="text" asp-for="Soyad" class="form-control form-control-lg" />
-                                        <span asp-validation-for="Soyad"></span>
+                                        <span asp-validation-for="Soyad" class="bg-danger text-white"></span>
                                     </div>
 
                                 </div>
@@ -63,7 +63,7 @@
                                     <div class="form-outline datepicker w-100">
                                         <label asp-for="DogumTarihi" class="form-label">Doğum Tarihi</label>
                                         <input type="date" class="form-control form-control-lg" asp-for="DogumTarihi" />
-                                        <span asp-validation-for="DogumTarihi"></span>
+                                        <span asp-validation-for="DogumTarihi" class="bg-danger text-white"></span>
                                     </div>
 
                                 </div>
@@ -117,4 +117,8 @@
     </div>
 </section>
 
-<div asp-validation-summary="All" class="bg-danger text-white"></div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

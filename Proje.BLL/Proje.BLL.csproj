@@ -9,8 +9,6 @@
   <ItemGroup>
 
     <Folder Include="AutoMapper\" />
-
-    <Folder Include="Models\VMs\" />
   </ItemGroup>
 
   <ItemGroup>

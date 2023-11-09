@@ -31,6 +31,7 @@ $('#boyut').change(function () {
         success: function (response) {
             $('#menuler').html(response)
         }
+
     });
 });
 function SepettenSil(siparisID) {
@@ -51,4 +52,5 @@ function SepettenSil(siparisID) {
         }
     })
 }
+
 

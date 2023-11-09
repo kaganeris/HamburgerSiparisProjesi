@@ -16,6 +16,7 @@ namespace Proje.DATA.Entities
         }
         public string Adi { get; set; }
         public decimal Fiyat { get; set; }
+        public byte[]? Fotograf { get; set; }
         public List<SiparislerMenuler> SiparislerMenuler { get; set; }
         public List<Sepet> SepettekiMenuler { get; set; }
     }
