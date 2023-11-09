@@ -1,8 +1,10 @@
+
 ﻿using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using Proje.BLL.Models.DTOs;
 using Proje.BLL.Validations;
+
 using Proje.DATA.Entities;
 using Proje.UI.Models;
 using System.Diagnostics;
@@ -20,7 +22,6 @@ namespace Proje.UI.Controllers
 
         public IActionResult Index()
         {
-            
             return View();
         }
 

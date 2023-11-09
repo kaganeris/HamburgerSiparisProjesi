@@ -31,14 +31,35 @@ namespace Proje.UI.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(CreateMenuDTO createMenu)
+        public async Task<IActionResult> Create(CreateMenuDTO createMenu)
         {
             CreateMenuDTOValidator validator = new();
             var valid=validator.Validate(createMenu);
             if(valid.IsValid)
             {
-
                 Menu menu = _mapper.Map<Menu>(createMenu);
+
+                if (createMenu.Image != null && IsImage(createMenu.Image.ContentType))
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        createMenu.Image.CopyTo(memoryStream);
+                        byte[] pictureBytes = memoryStream.ToArray();
+                        menu.Fotograf = pictureBytes;
+                    }
+                }
+                else
+                {
+                    string defaultImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3spgDjctvtaA9E4p9SQINgrxItx3kqGFpTA&usqp=CAU";
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        
+                        byte[] imageBytes = await client.GetByteArrayAsync(defaultImageUrl);
+
+                        menu.Fotograf = imageBytes;
+                    }
+                }
                 _service.Add(menu);
                 return RedirectToAction("Index");
             }
@@ -92,6 +113,12 @@ namespace Proje.UI.Areas.Admin.Controllers
         {
             _service.DeleteById(menu.ID);
             return RedirectToAction("Index");
+        }
+
+        private bool IsImage(string contentType)
+        {
+            string[] allowedContentTypes = { "image/jpeg", "image/png", "image/gif" };
+            return allowedContentTypes.Contains(contentType);
         }
     }
 }
