@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proje.DATA.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,8 @@ namespace Proje.DATA.Entities
         public int MenuID { get; set; }
         public Siparis Siparis { get; set; }
         public Menu Menu { get; set; }
-    }
+		public int Adet { get; set; }
+		public Boyut Boyut { get; set; }
+        public decimal TotalFiyat { get; set; }
+	}
 }

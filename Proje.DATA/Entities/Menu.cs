@@ -12,9 +12,11 @@ namespace Proje.DATA.Entities
         public Menu()
         {
             SiparislerMenuler = new();
+            SepettekiMenuler = new();
         }
         public string Adi { get; set; }
         public decimal Fiyat { get; set; }
         public List<SiparislerMenuler> SiparislerMenuler { get; set; }
+        public List<Sepet> SepettekiMenuler { get; set; }
     }
 }

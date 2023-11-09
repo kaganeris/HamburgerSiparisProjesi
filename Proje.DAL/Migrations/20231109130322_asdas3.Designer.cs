@@ -12,8 +12,8 @@ using Proje.DAL.Context;
 namespace Proje.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231108095718_initial")]
-    partial class initial
+    [Migration("20231109130322_asdas3")]
+    partial class asdas3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -317,7 +317,7 @@ namespace Proje.DAL.Migrations
                     b.ToTable("Menuler");
                 });
 
-            modelBuilder.Entity("Proje.DATA.Entities.Siparis", b =>
+            modelBuilder.Entity("Proje.DATA.Entities.Sepet", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -333,6 +333,50 @@ namespace Proje.DAL.Migrations
 
                     b.Property<int>("Boyut")
                         .HasColumnType("int");
+
+                    b.Property<int?>("ExtraMalzemeID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Fiyat")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("GuncellemeZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MenuID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OlusturmaZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("SilinmeZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ExtraMalzemeID");
+
+                    b.HasIndex("MenuID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Sepettekiler");
+                });
+
+            modelBuilder.Entity("Proje.DATA.Entities.Siparis", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<bool>("AktifMi")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("GuncellemeZamani")
                         .HasColumnType("datetime2");
@@ -361,6 +405,15 @@ namespace Proje.DAL.Migrations
 
                     b.Property<int>("MenuID")
                         .HasColumnType("int");
+
+                    b.Property<int>("Adet")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Boyut")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalFiyat")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("SiparisID", "MenuID");
 
@@ -439,6 +492,29 @@ namespace Proje.DAL.Migrations
                     b.Navigation("Siparis");
                 });
 
+            modelBuilder.Entity("Proje.DATA.Entities.Sepet", b =>
+                {
+                    b.HasOne("Proje.DATA.Entities.ExtraMalzeme", "ExtraMalzeme")
+                        .WithMany("SepettekiExtraMalzemeler")
+                        .HasForeignKey("ExtraMalzemeID");
+
+                    b.HasOne("Proje.DATA.Entities.Menu", "Menu")
+                        .WithMany("SepettekiMenuler")
+                        .HasForeignKey("MenuID");
+
+                    b.HasOne("Proje.DATA.Entities.AppUser", "User")
+                        .WithMany("SepettekiMenuler")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ExtraMalzeme");
+
+                    b.Navigation("Menu");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Proje.DATA.Entities.Siparis", b =>
                 {
                     b.HasOne("Proje.DATA.Entities.AppUser", "AppUser")
@@ -471,16 +547,22 @@ namespace Proje.DAL.Migrations
 
             modelBuilder.Entity("Proje.DATA.Entities.AppUser", b =>
                 {
+                    b.Navigation("SepettekiMenuler");
+
                     b.Navigation("Siparisler");
                 });
 
             modelBuilder.Entity("Proje.DATA.Entities.ExtraMalzeme", b =>
                 {
                     b.Navigation("ExtraMalzemelerSiparisler");
+
+                    b.Navigation("SepettekiExtraMalzemeler");
                 });
 
             modelBuilder.Entity("Proje.DATA.Entities.Menu", b =>
                 {
+                    b.Navigation("SepettekiMenuler");
+
                     b.Navigation("SiparislerMenuler");
                 });
 

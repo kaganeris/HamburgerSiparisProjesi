@@ -1,17 +1,27 @@
 ﻿@using Proje.BLL.Models.DTOs;
 
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+
 @model SiparisGonderDTO
-
-<tr>
-    <td>@Model.MenuAdi @Model.Boyut.ToString() x @Model.Adet.ToString() </td>
-    <td>@Model.Fiyat</td>
-</tr>
-
-<style>
-    tr{
-        background-color:greenyellow;
-    }
-</style>
+@{
+	decimal totalFiyat = 0;
+}
+<table class="table table-hover table-success">
+	<tr>
+		<th>Sepetinizdekiler</th>
+		<th>Fiyat</th>
+		<th></th>
+	</tr>
+	@foreach (var item in Model.Sepettekiler)
+	{
+		totalFiyat += item.Fiyat;
+		<tr>
+			<td>@item.MenuID @item.Boyut.ToString() x @item.Adet.ToString()</td>
+			<td>@item.Fiyat</td>
+			<td><button type="button" class="btn btn-outline-danger" onclick="SepettenSil(@item.ID)">-</button></td>
+		</tr>
+	}
+	<tr>
+		<td></td>
+		<td>@totalFiyat</td>
+	</tr>
+</table>

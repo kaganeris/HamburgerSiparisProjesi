@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Proje.DAL.Migrations
 {
-    public partial class initial : Migration
+    public partial class bimillah : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -195,14 +195,39 @@ namespace Proje.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Sepettekiler",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MenuNumarasi = table.Column<int>(type: "int", nullable: false),
+                    MenuAdi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Adet = table.Column<int>(type: "int", nullable: false),
+                    Boyut = table.Column<int>(type: "int", nullable: false),
+                    Fiyat = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    OlusturmaZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GuncellemeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SilinmeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sepettekiler", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Sepettekiler_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Siparisler",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Adet = table.Column<int>(type: "int", nullable: false),
-                    Boyut = table.Column<int>(type: "int", nullable: false),
                     OlusturmaZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GuncellemeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SilinmeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -248,7 +273,15 @@ namespace Proje.DAL.Migrations
                 columns: table => new
                 {
                     SiparisID = table.Column<int>(type: "int", nullable: false),
-                    MenuID = table.Column<int>(type: "int", nullable: false)
+                    MenuID = table.Column<int>(type: "int", nullable: false),
+                    Adet = table.Column<int>(type: "int", nullable: false),
+                    Boyut = table.Column<int>(type: "int", nullable: false),
+                    TotalFiyat = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false),
+                    OlusturmaZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GuncellemeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SilinmeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -312,6 +345,11 @@ namespace Proje.DAL.Migrations
                 column: "SiparisID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Sepettekiler_AppUserId",
+                table: "Sepettekiler",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Siparisler_UserID",
                 table: "Siparisler",
                 column: "UserID");
@@ -341,6 +379,9 @@ namespace Proje.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "ExtraMalzemelerSiparisler");
+
+            migrationBuilder.DropTable(
+                name: "Sepettekiler");
 
             migrationBuilder.DropTable(
                 name: "SiparislerMenuler");

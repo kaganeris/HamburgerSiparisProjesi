@@ -33,6 +33,7 @@ namespace Proje.UI
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
             builder.Services.AddTransient(typeof(IMenuService),typeof(MenuService));
+            builder.Services.AddTransient(typeof(ISepetService),typeof(SepetService));
 
             builder.Services.AddAutoMapper(typeof(MenuMapProfile));
 

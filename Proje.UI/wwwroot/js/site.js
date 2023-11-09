@@ -4,7 +4,9 @@ function SiparisGonder() {
     let SiparisData = {
         MenuID : $("input[type='radio']:checked").val(),
         Boyut: $("#boyut option:selected").val(),
-        Adet: $('#adet').val()
+        Adet: $('#adet').val(),
+        UserID: $('#userID').val()
+
     }
     $.ajax({
         url: "/User/Siparis/SiparisGonder",
@@ -12,12 +14,11 @@ function SiparisGonder() {
         dataType: "html",
         data: SiparisData,
         success: function (response) {
-            console.log(response);
-
-            $('#siparisListesi').append(response);
+            console.log(response)
+            $('#siparisListesi').html(response);
         },
         error: function (data) {
-            console.log("nbr")
+            console.log("Hata Oluştu")
         }
     })
 }
@@ -32,4 +33,22 @@ $('#boyut').change(function () {
         }
     });
 });
+function SepettenSil(siparisID) {
+    let sepetData={
+        sepetID : siparisID
+    }
+    $.ajax({
+        url: "/User/Siparis/SepettenSil",
+        type: "POST",
+        dataType: "html",
+        data: sepetData,
+        success: function (response) {
+            console.log(response)
+            $('#siparisListesi').html(response);
+        },
+        error: function (data) {
+            console.log("Hata Oluştu")
+        }
+    })
+}
 
