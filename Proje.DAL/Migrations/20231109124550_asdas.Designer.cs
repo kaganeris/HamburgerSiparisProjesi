@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proje.DAL.Context;
 
@@ -11,9 +12,10 @@ using Proje.DAL.Context;
 namespace Proje.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231109124550_asdas")]
+    partial class asdas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,9 +176,6 @@ namespace Proje.DAL.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ConfirmCode")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DogumTarihi")
                         .HasColumnType("datetime2");
 
@@ -256,20 +255,13 @@ namespace Proje.DAL.Migrations
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
-
-
-
                     b.Property<DateTime?>("GuncellemeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OlusturmaZamani")
                         .HasColumnType("datetime2");
 
-
-
                     b.Property<DateTime?>("SilinmeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
@@ -311,21 +303,13 @@ namespace Proje.DAL.Migrations
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
-
-                    b.Property<byte[]>("Fotograf")
-                        .HasColumnType("varbinary(max)");
-
-
                     b.Property<DateTime?>("GuncellemeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OlusturmaZamani")
                         .HasColumnType("datetime2");
 
-
                     b.Property<DateTime?>("SilinmeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
@@ -350,17 +334,13 @@ namespace Proje.DAL.Migrations
                     b.Property<int>("Boyut")
                         .HasColumnType("int");
 
-
-                    b.Property<int?>("ExtraMalzemeID")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("GuncellemeZamani")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MenuID")
+                    b.Property<int>("MenuID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OlusturmaZamani")
@@ -374,8 +354,6 @@ namespace Proje.DAL.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ExtraMalzemeID");
 
                     b.HasIndex("MenuID");
 
@@ -395,17 +373,13 @@ namespace Proje.DAL.Migrations
                     b.Property<bool>("AktifMi")
                         .HasColumnType("bit");
 
-
                     b.Property<DateTime?>("GuncellemeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OlusturmaZamani")
                         .HasColumnType("datetime2");
 
-
                     b.Property<DateTime?>("SilinmeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserID")
@@ -430,8 +404,23 @@ namespace Proje.DAL.Migrations
                     b.Property<int>("Adet")
                         .HasColumnType("int");
 
+                    b.Property<bool>("AktifMi")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Boyut")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("GuncellemeZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OlusturmaZamani")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("SilinmeZamani")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("TotalFiyat")
                         .HasColumnType("decimal(18,2)");
@@ -515,21 +504,17 @@ namespace Proje.DAL.Migrations
 
             modelBuilder.Entity("Proje.DATA.Entities.Sepet", b =>
                 {
-                    b.HasOne("Proje.DATA.Entities.ExtraMalzeme", "ExtraMalzeme")
-                        .WithMany("SepettekiExtraMalzemeler")
-                        .HasForeignKey("ExtraMalzemeID");
-
                     b.HasOne("Proje.DATA.Entities.Menu", "Menu")
                         .WithMany("SepettekiMenuler")
-                        .HasForeignKey("MenuID");
+                        .HasForeignKey("MenuID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Proje.DATA.Entities.AppUser", "User")
                         .WithMany("SepettekiMenuler")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ExtraMalzeme");
 
                     b.Navigation("Menu");
 
@@ -576,8 +561,6 @@ namespace Proje.DAL.Migrations
             modelBuilder.Entity("Proje.DATA.Entities.ExtraMalzeme", b =>
                 {
                     b.Navigation("ExtraMalzemelerSiparisler");
-
-                    b.Navigation("SepettekiExtraMalzemeler");
                 });
 
             modelBuilder.Entity("Proje.DATA.Entities.Menu", b =>

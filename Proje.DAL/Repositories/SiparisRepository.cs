@@ -39,14 +39,14 @@ namespace Proje.DAL.Repositories
             return context.Siparisler.Include(x => x.SiparislerMenuler).ToList();
         }
 
-        public List<Siparis> GetSiparisListPiecesGreaterThan(int pieces)
-        {
-            return context.Siparisler.Where(x => x.Adet > pieces).ToList();
-        }
+		public List<Siparis> GetSiparisListPiecesGreaterThan(int pieces)
+		{
+			throw new NotImplementedException();
+		}
 
-        public List<Siparis> GetSiparisListPiecesSmallerThan(int pieces)
-        {
-            return context.Siparisler.Where(x => x.Adet < pieces).ToList();
-        }
-    }
+		public List<Siparis> GetSiparisListPiecesSmallerThan(int pieces)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
