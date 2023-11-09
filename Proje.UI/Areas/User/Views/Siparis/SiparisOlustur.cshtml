@@ -1,12 +1,17 @@
-﻿@using Proje.BLL.Models.DTOs;
+﻿@using Microsoft.AspNetCore.Identity;
+@using Proje.BLL.Models.DTOs;
 @using Proje.DATA.Entities;
 @using Proje.DATA.Enums;
 @model SiparisOlusturDTO
+@inject UserManager<AppUser> UserManager
 
 @{
 	ViewData["Title"] = "SiparisOlustur";
+	AppUser user = await UserManager.GetUserAsync(User);
 }
-
+<div>
+	<input type="hidden" value="@user.Id" id="userID" />
+</div>
 <div class="container">
 	<div class="row">
 		<div class="col">
@@ -37,17 +42,27 @@
 							<option value="@item">@item.ToString()</option>
 						}
 					</select>
+
+					<input type="number" value="1" id="adet"/>
 				</div>
 
-				<button type="button" class="btn btn-outline-secondary" onclick="SiparisGonder()">Sipariş Oluştur</button>
+				<button type="button" class="btn btn-outline-secondary" onclick="SiparisGonder()">Sepete Ekle</button>
 		</div>
 		<div class="col">
-			<div id="siparisListesi" class="">
+			<div id="siparisListesi">
+				<table class="table table-hover table-success">
+					<tr>
+						<th>Sepetinizdekiler</th>
+						<th>Fiyat</th>
+					</tr>
+
+				</table>
+
+			</div>
+			<div>
+				<a asp-action="SepetiOnayla" class="btn btn-primary">Sepeti Onayla</a>
 			</div>
 		</div>
-		
-
-		
 	</div>
 
 </div>

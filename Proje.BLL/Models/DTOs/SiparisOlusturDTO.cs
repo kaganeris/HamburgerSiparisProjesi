@@ -15,10 +15,8 @@ namespace Proje.BLL.Models.DTOs
         public SiparisOlusturDTO()
         {
             Menuler = new();
-            gonderilenSiparisler = new();
         }
         public List<Menu> Menuler { get; set; }
-        public List<SiparisGonderDTO> gonderilenSiparisler { get; set; }
         public Boyut Boyut { get; set; }
     }
 }

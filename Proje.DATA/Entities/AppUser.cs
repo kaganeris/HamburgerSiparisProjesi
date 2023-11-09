@@ -13,6 +13,7 @@ namespace Proje.DATA.Entities
         public AppUser()
         {
             Siparisler = new();
+            SepettekiMenuler = new();
         }
         public string Ad { get; set; }
         public string Soyad { get; set; }
@@ -20,5 +21,6 @@ namespace Proje.DATA.Entities
         public Cinsiyet Cinsiyet { get; set; }
         public DateTime DogumTarihi { get; set; }
         public List<Siparis> Siparisler { get; set; }
+        public List<Sepet> SepettekiMenuler { get; set; }
     }
 }
