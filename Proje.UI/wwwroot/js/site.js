@@ -29,6 +29,8 @@ $('#boyut').change(function () {
         success: function (response) {
             $('#menuler').html(response);
         }
-    });
-});
+
+    })
+}
+
 
