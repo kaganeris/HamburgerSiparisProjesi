@@ -1,0 +1,17 @@
+﻿@using Proje.BLL.Models.VMs;
+@model ConfirmMailVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<form method="post">
+    <h2>Mail Adresiniz: @ViewBag.Email</h2>
+    <input type="hidden" asp-for="Email" value="@ViewBag.Email"/>
+    <br />
+    <label>Mail Adresinize Gelen 6 Haneli Kodu Giriniz</label>
+    <input type="text" class="form-control" asp-for="ConfirmCode"/>
+    <div class="bg-danger text-white">@ViewBag.Uyarı</div>
+    <br />
+    <button class="btn btn-primary">Hesabı Aktifleştir</button>
+</form>
+

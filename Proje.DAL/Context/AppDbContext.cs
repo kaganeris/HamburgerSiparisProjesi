@@ -22,6 +22,8 @@ namespace Proje.DAL.Context
         public DbSet<ExtraMalzeme> ExtraMalzemeler { get; set; }
         public DbSet<ExtraMalzemelerSiparisler> ExtraMalzemelerSiparisler { get; set; }
         public DbSet<SiparislerMenuler> SiparislerMenuler { get; set; }
+        public DbSet<Sepet> Sepettekiler { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
