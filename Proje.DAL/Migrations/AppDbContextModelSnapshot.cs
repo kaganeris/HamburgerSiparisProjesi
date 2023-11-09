@@ -304,6 +304,9 @@ namespace Proje.DAL.Migrations
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<byte[]>("Fotograf")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<DateTime?>("GuncellemeZamani")
                         .HasColumnType("datetime2");
 

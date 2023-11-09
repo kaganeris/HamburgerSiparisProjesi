@@ -22,7 +22,8 @@
             <tr>
                 <form asp-action="Index">
                     <td>@counter</td>
-                    
+
+                    <td><img class="img-fluid" src="data:image/jpeg;base64,@Convert.ToBase64String(menu.Fotograf)" style="width:100px; height:100px;" alt="Resim" /></td>
                     <td>@menu.Adi</td>
                     <td>@menu.Fiyat</td>
 

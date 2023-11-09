@@ -116,6 +116,7 @@ namespace Proje.UI.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
+
             return RedirectToAction("Index", "Home");
         }
 
