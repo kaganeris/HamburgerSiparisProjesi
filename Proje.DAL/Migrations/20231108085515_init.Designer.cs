@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proje.DAL.Context;
 
@@ -11,9 +12,10 @@ using Proje.DAL.Context;
 namespace Proje.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231108085515_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,20 +255,13 @@ namespace Proje.DAL.Migrations
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
-
-
-
                     b.Property<DateTime?>("GuncellemeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OlusturmaZamani")
                         .HasColumnType("datetime2");
 
-
-
                     b.Property<DateTime?>("SilinmeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
@@ -308,17 +303,13 @@ namespace Proje.DAL.Migrations
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
-
                     b.Property<DateTime?>("GuncellemeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OlusturmaZamani")
                         .HasColumnType("datetime2");
 
-
                     b.Property<DateTime?>("SilinmeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
@@ -343,17 +334,13 @@ namespace Proje.DAL.Migrations
                     b.Property<int>("Boyut")
                         .HasColumnType("int");
 
-
                     b.Property<DateTime?>("GuncellemeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("OlusturmaZamani")
                         .HasColumnType("datetime2");
 
-
                     b.Property<DateTime?>("SilinmeZamani")
-
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserID")

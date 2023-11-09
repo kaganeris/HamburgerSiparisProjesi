@@ -27,6 +27,7 @@ namespace Proje.UI
 
             builder.Services.AddAutoMapper(typeof(MapProfile));
 
+
             builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));

@@ -12,14 +12,13 @@ namespace Proje.BLL.Models.DTOs
 {
     public class SiparisOlusturDTO
     {
-        public SiparisOlusturDTO(IBaseRepository<Menu> baseRepository)
+        public SiparisOlusturDTO()
         {
-            MenuService menuService = new(baseRepository);
-            Menuler = menuService.GetAll();
+            Menuler = new();
+            gonderilenSiparisler = new();
         }
-        public int UserID { get; set; }
         public List<Menu> Menuler { get; set; }
+        public List<SiparisGonderDTO> gonderilenSiparisler { get; set; }
         public Boyut Boyut { get; set; }
-        public int MenuID { get; set; }
     }
 }

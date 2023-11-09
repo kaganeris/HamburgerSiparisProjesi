@@ -2,7 +2,7 @@
 @if (User.Identity.IsAuthenticated)
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="User" asp-action="Create" asp-controller="Siparis">Sipariş Ekle</a>
+        <a class="nav-link text-dark" asp-area="User" asp-action="SiparisOlustur" asp-controller="Siparis">Sipariş Ekle</a>
     </li class="nav-item">
     @if (User.IsInRole("Admin"))
     {
