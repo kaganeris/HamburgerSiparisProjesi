@@ -6,38 +6,42 @@
 }
 
 @{
-	decimal totalFiyat = 0;
+    decimal totalFiyat = 0;
 }
+<div class="container-xxl py-5 bg-dark  mb-5">
+    <div class="container text-center my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Sipariş Oluştur</h1>
+        <div class="col">
+            <div class="row">
+                <div id="siparisListesi">
+                    <table class="table table-hover table-success">
+                        <tr>
+                            <th>Sepetinizdekiler</th>
+                            <th>Fiyat</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in Model.Sepettekiler)
+                        {
+                            totalFiyat += item.Fiyat;
+                            <tr>
+                                <td>@item.MenuID @item.Boyut.ToString() x @item.Adet.ToString()</td>
+                                <td>@item.Fiyat</td>
+                                <td><button type="button" class="btn btn-outline-danger" onclick="SepettenSil(@item.ID)">-</button></td>
+                            </tr>
+                        }
+                        <tr>
+                            <td></td>
+                            <td>@totalFiyat</td>
+                        </tr>
+                    </table>
 
-<div class="col">
-	<div class="row">
-		<div id="siparisListesi">
-			<table class="table table-hover table-success">
-				<tr>
-					<th>Sepetinizdekiler</th>
-					<th>Fiyat</th>
-					<th></th>
-				</tr>
-				@foreach (var item in Model.Sepettekiler)
-				{
-					totalFiyat += item.Fiyat;
-					<tr>
-						<td>@item.MenuID @item.Boyut.ToString() x @item.Adet.ToString()</td>
-						<td>@item.Fiyat</td>
-						<td><button type="button" class="btn btn-outline-danger" onclick="SepettenSil(@item.ID)">-</button></td>
-					</tr>
-				}
-				<tr>
-					<td></td>
-					<td>@totalFiyat</td>
-				</tr>
-			</table>
-
-		</div>
-		<div>
-			<a asp-action="SiparisOnayla" class="btn btn-primary">Siparişi Onayla</a>
-		</div>
-	</div>
+                </div>
+                <div>
+                    <a asp-action="SiparisOnayla" class="btn btn-primary">Siparişi Onayla</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
