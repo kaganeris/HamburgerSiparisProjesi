@@ -11,9 +11,11 @@ namespace Proje.DATA.Entities
         public ExtraMalzeme()
         {
             ExtraMalzemelerSiparisler = new();
+            SepettekiExtraMalzemeler = new();
         }
         public string Adi { get; set; }
         public decimal Fiyat { get; set; }
         public List<ExtraMalzemelerSiparisler> ExtraMalzemelerSiparisler { get; set; }
-    }
+		public List<Sepet> SepettekiExtraMalzemeler { get; set; }
+	}
 }
