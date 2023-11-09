@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using FluentValidation.AspNetCore;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 using Proje.BLL.Models.DTOs;
 using Proje.BLL.Validations;
 using Proje.DATA.Entities;
@@ -45,9 +48,17 @@ namespace Proje.UI.Controllers
 
                     if (signInResult.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        if(appUser.EmailConfirmed == true)
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            TempData["Mail"] = appUser.Email;
+                            return RedirectToAction("Index", "ConfirmMail");
+                        }
                     }
-                    ViewBag.Uyarı = "Hatalı şifre!";
+                    ViewBag.Uyarı = "Kullanıcı Adı veya Şifre Hatalı!";
                     return View();
                 }
             }
@@ -70,12 +81,17 @@ namespace Proje.UI.Controllers
             var valid = validator.Validate(registerDTO);
             if(valid.IsValid)
             {
+                Random random = new Random();
+                int code = random.Next(100000, 1000000);
                 AppUser appUser = mapper.Map<AppUser>(registerDTO);
+                appUser.ConfirmCode = code;
                 IdentityResult result = await userManager.CreateAsync(appUser, registerDTO.Password);
                 if(result.Succeeded)
                 {
+                    SendEmail(appUser.Email, code);
+                    TempData["Mail"] = appUser.Email;
                     await userManager.AddToRoleAsync(appUser, "Musteri");
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Index","ConfirmMail");
                 }
                 else
                 {
@@ -91,6 +107,7 @@ namespace Proje.UI.Controllers
                 {
                     ModelState.AddModelError("KayitHata", hata.ErrorMessage);
                 }
+
             }
             return View();
             
@@ -99,7 +116,30 @@ namespace Proje.UI.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
+
             return RedirectToAction("Index", "Home");
+        }
+
+        public void SendEmail(string email, int code)
+        {
+            MimeMessage mimeMessage = new MimeMessage();
+            MailboxAddress mailboxAddressFrom = new MailboxAddress("HamburgerProjesi Admin", "projemaka@gmail.com"); // Mailin kimden gideceği!
+            MailboxAddress mailboxAddressTo = new MailboxAddress("User", email);
+
+            mimeMessage.From.Add(mailboxAddressFrom);
+            mimeMessage.To.Add(mailboxAddressTo);
+
+            var bodyBuilder = new BodyBuilder();
+            bodyBuilder.TextBody = "Kayıt işlemini gerçekleştirmek için onay kodunuz: " + code;
+            mimeMessage.Body = bodyBuilder.ToMessageBody();
+
+            mimeMessage.Subject = "Hamburger Projesi Onay Kodu";
+
+            SmtpClient client = new SmtpClient();
+            client.Connect("smtp.gmail.com", 587, false);
+            client.Authenticate("projemaka@gmail.com", "wvgdopwbgegdlgcl");
+            client.Send(mimeMessage);
+            client.Disconnect(true);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Proje.DATA.Entities;
 using Proje.UI.Models;
 using System.Diagnostics;
 
@@ -15,7 +16,6 @@ namespace Proje.UI.Controllers
 
         public IActionResult Index()
         {
-            
             return View();
         }
 

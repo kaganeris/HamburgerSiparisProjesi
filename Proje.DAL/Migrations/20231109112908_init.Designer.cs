@@ -12,7 +12,7 @@ using Proje.DAL.Context;
 namespace Proje.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231108085515_init")]
+    [Migration("20231109112908_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,6 +176,9 @@ namespace Proje.DAL.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ConfirmCode")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DogumTarihi")
                         .HasColumnType("datetime2");
 
@@ -302,6 +305,9 @@ namespace Proje.DAL.Migrations
 
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<byte[]>("Fotograf")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime?>("GuncellemeZamani")
                         .HasColumnType("datetime2");
