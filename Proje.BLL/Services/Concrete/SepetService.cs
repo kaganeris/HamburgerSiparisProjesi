@@ -6,11 +6,11 @@ using Proje.DATA.Repositories;
 
 namespace Proje.BLL.Services.Concrete
 {
-	public class SepetService : BaseService<DATA.Entities.Sepet>, ISepetService
+	public class SepetService : BaseService<Sepet>, ISepetService
     {
-		private readonly IBaseRepository<DATA.Entities.Sepet> _baseRepository;
+		private readonly IBaseRepository<Sepet> _baseRepository;
 
-		public SepetService(IBaseRepository<DATA.Entities.Sepet> baseRepository) : base(baseRepository)
+		public SepetService(IBaseRepository<Sepet> baseRepository) : base(baseRepository)
 		{
 			_baseRepository = baseRepository;
 

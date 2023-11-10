@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Proje.BLL.Models.DTOs;
+@using Proje.DATA.Enums;
+@model UpdateUserDTO
+@{
     ViewData["Title"] = "Settings";
 }
 
@@ -12,57 +15,60 @@
 <link rel="stylesheet" type="text/css" href="~/template/profilecss/style.css" />
 
 <div class="profile-setting">
-    <form>
+    <form method="post">
         <ul class="profile-edit-list row">
             <li class="weight-500 col-md-6 offset-3">
                 <h4 class="text-blue h5 mb-20">
                     Kullanıcı Ayarlarını Güncelle
                 </h4>
+                <div asp-validation-summary="All"></div>
+                <input asp-for="UserId" type="hidden"/>
                 <div class="form-group">
-                    <label>Ad</label>
-                    <input class="form-control form-control-lg"
+                    <label asp-for="Ad">Ad</label>
+                    <input asp-for="Ad" class="form-control form-control-lg"
                            type="text" />
                 </div>
                 <div class="form-group">
-                    <label>Soyad</label>
-                    <input class="form-control form-control-lg"
+                    <label asp-for="Soyad">Soyad</label>
+                    <input asp-for="Soyad" class="form-control form-control-lg"
                            type="text" />
                 </div>
                 <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control form-control-lg"
+                    <label asp-for="Email">Email</label>
+                    <input asp-for="Email" class="form-control form-control-lg"
                            type="email" />
                 </div>
                 <div class="form-group">
-                    <label>Doğum Tarihi</label>
-                    <input class="form-control form-control-lg date-picker"
+                    <label asp-for="PhoneNumber">Telefon Numarası</label>
+                    <input asp-for="PhoneNumber" class="form-control form-control-lg"
                            type="text" />
                 </div>
                 <div class="form-group">
-                    <label>Cinsiyet</label>
+                    <label asp-for="DogumTarihi">Doğum Tarihi</label>
+                    <input asp-for="DogumTarihi" class="form-control form-control-lg date-picker"
+                           type="date" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cinsiyet">Cinsiyet</label>
                     <div class="d-flex">
                         <div class="custom-control custom-radio mb-5 mr-20">
                             <input type="radio"
-                                   id="customRadio4"
-                                   name="customRadio"
-                                   class="custom-control-input" />
-                            <label class="custom-control-label weight-400"
-                                   for="customRadio4">Erkek</label>
+                                   asp-for="Cinsiyet"
+                                   class="custom-control-input" value="@Cinsiyet.Erkek" />
+                            <label class="custom-control-label weight-400">Erkek</label>
                         </div>
                         <div class="custom-control custom-radio mb-5">
                             <input type="radio"
-                                   id="customRadio5"
-                                   name="customRadio"
-                                   class="custom-control-input" />
-                            <label class="custom-control-label weight-400"
-                                   for="customRadio5">Kadın</label>
+                                   asp-for="Cinsiyet"
+                                   class="custom-control-input" value="@Cinsiyet.Kadin" />
+                            <label class="custom-control-label weight-400">Kadın</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group mb-0">
                     <input type="submit"
                            class="btn btn-primary"
-                           value="Update Information" />
+                           value="Güncelle" />
                 </div>
             </li>
         </ul>
