@@ -40,14 +40,14 @@
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Hesabına Giriş Yap</h5>
 
                                     <div class="form-outline mb-4">
-                                        <input type="text" asp-for="UserName" class="form-control form-control-lg" />
                                         <label class="form-label" asp-for="UserName">Kullanıcı Adı</label>
+                                        <input type="text" asp-for="UserName" class="form-control form-control-lg" />
                                         <span asp-validation-for="UserName" class="bg-danger text-white"></span>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="password" asp-for="Password" class="form-control form-control-lg" />
                                         <label class="form-label" asp-for="Password">Password</label>
+                                        <input type="password" asp-for="Password" class="form-control form-control-lg" />
                                         <span asp-validation-for="Password" class="bg-danger text-white"></span>
                                     </div>
                                     <div asp-validation-summary="All" class="bg-danger text-white"></div>
@@ -56,13 +56,13 @@
                                         <input class="btn btn-dark btn-lg btn-block" type="submit" value="Giriş"/>
                                     </div>
 
-                                    <a class="small text-muted" href="#!">Şifrenizi unuttunuz mu?</a>
+
+                                    <a class="small text-muted" asp-action="ForgetPassword" asp-controller="PasswordChange">Şifrenizi Unuttunuz Mu?</a>
                                     <p class="mb-5 pb-lg-2" style="color: #393f81;">
-                                        Hesabınız mı yok? <a href="#!"
-                                                                  style="color: #393f81;">Buradan kayıt olun.</a>
+                                        Hesabınız Yok Mu? <a asp-action="Register" asp-controller="User"
+                                                                  style="color: #393f81;">Buradan Kayıt Olun!</a>
+
                                     </p>
-                                    <a href="#!" class="small text-muted">Terms of use.</a>
-                                    <a href="#!" class="small text-muted">Privacy policy</a>
                                 </form>
 
                             </div>

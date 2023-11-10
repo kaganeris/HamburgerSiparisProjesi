@@ -1,5 +1,6 @@
 ﻿
 
+
 function SiparisGonder() {
     let SiparisData = {
         MenuID : $("input[type='radio']:checked").val(),

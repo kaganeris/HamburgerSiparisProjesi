@@ -13,6 +13,12 @@ namespace Proje.DAL.EntityConfig
     {
         public void Configure(EntityTypeBuilder<SiparislerMenuler> builder)
         {
+            builder.HasOne(x=>x.Menu)
+                .WithMany(x=>x.SiparislerMenuler)
+                .HasForeignKey(x=>x.MenuID);
+            builder.HasOne(x => x.Siparis)
+                .WithMany(x => x.SiparislerMenuler)
+                .HasForeignKey(x => x.SiparisID);
             builder.HasKey(x => new { x.SiparisID, x.MenuID });
         }
     }

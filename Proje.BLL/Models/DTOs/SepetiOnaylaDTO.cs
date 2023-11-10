@@ -14,5 +14,6 @@ namespace Proje.BLL.Models.DTOs
             Sepettekiler = new();
         }
         public List<Sepet> Sepettekiler { get; set; }
+        public string userId { get; set; }
 	}
 }
