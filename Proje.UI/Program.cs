@@ -31,9 +31,12 @@ namespace Proje.UI
             builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            builder.Services.AddTransient(typeof(IAraTabloRepository<>), typeof(AraTabloRepository<>));
             builder.Services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
+            builder.Services.AddTransient(typeof(IAraTabloService<>), typeof(AraTabloService<>));
             builder.Services.AddTransient(typeof(IMenuService),typeof(MenuService));
             builder.Services.AddTransient(typeof(ISepetService),typeof(SepetService));
+            builder.Services.AddTransient(typeof(ISiparisMenulerService),typeof(SiparisMenulerService));
 
             builder.Services.AddAutoMapper(typeof(MenuMapProfile));
 
