@@ -5,8 +5,11 @@
 @{
 	decimal totalFiyat = 0;
 }
-<table class="table table-hover table-success">
+<table class="table table-hover table-warning">
 	<tr>
+		<th>Ürünleriniz</th>
+		<th></th>
+		<th></th>
 		<th></th>
 		<th></th>
 		<th></th>
@@ -15,14 +18,21 @@
 	{
 		totalFiyat += item.Fiyat;
 		<tr>
-			<td><img class="img-fluid" src="data:image/jpeg;base64,@Convert.ToBase64String(menu.Fotograf)"></td>
-			<td>@item.MenuID @item.Boyut.ToString() x @item.Adet.ToString()</td>
-			<td>@item.Fiyat</td>
+			<td><img class="img-fluid" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Menu.Fotograf)"></td>
+			<td>@item.Menu.Adi @item.Boyut.ToString() x @item.Adet.ToString()</td>
 			<td><button type="button" class="btn btn-outline-danger" onclick="SepettenSil(@item.ID)">-</button></td>
+			<td>@item.Adet</td>
+			<td><button type="button" class="btn btn-outline-success" onclick="AdetArttır(@item.ID)">+</button></td>
+			<td>@item.Fiyat TL</td>
 		</tr>
 	}
 	<tr>
 		<td></td>
-		<td>@totalFiyat</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>@totalFiyat TL</td>
 	</tr>
 </table>
+<a class="btn product-btn btn-secondary" asp-action="SepetiOnayla">Siparişi Tamamla</a>

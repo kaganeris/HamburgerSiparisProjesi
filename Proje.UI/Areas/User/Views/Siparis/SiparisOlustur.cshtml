@@ -28,7 +28,7 @@
                                     @menu.Adi
                                 </h4>
                                 <p class="product-price">@menu.Fiyat</p>
-                                <a class="product-btn btn-primary" href="#">Sepete Ekle</a>
+                                <button class="btn product-btn btn-primary" onclick="SiparisGonder(@menu.ID)">Sepete Ekle</button>
                             </div>
                         </div>
                     </div>
@@ -36,12 +36,24 @@
             </section>
         </div>
         <div class="col-3" id="siparisListesi">
-           
+            <table class="table table-hover table-warning">
+                <tr>
+                    <th>Ürünleriniz</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </table>
+            <input type="hidden" id="ekleme" value="1" />
         </div>
     </div>
 </div>
 <div>
     <input type="hidden" value="@user.Id" id="userID" />
+    <input type="hidden" value="@Boyut.Küçük" id="boyut" />
+    <input type="hidden" value="1" id="adet" />
 </div>
 
 

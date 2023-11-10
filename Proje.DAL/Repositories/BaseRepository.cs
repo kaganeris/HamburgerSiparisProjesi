@@ -34,7 +34,7 @@ namespace Proje.DAL.Repositories
 
         }
 
-        public bool Delete(T item)
+        public virtual bool Delete(T item)
         {
             try
             {
