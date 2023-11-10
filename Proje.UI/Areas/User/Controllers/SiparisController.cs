@@ -13,22 +13,25 @@ namespace Proje.UI.Areas.User.Controllers
     [Authorize(Roles = "Musteri,Admin")]
     public class SiparisController : Controller
     {
-        private readonly IBaseRepository<Menu> baseRepository;
-        private readonly IBaseRepository<Sepet> _baseRepository;
-        private readonly IBaseRepository<Siparis> baseRepository1;
+        //private readonly IBaseRepository<Menu> baseRepository;
+        //private readonly IBaseRepository<Sepet> _baseRepository;
+        //private readonly IBaseRepository<Siparis> baseRepository1;
 
 		SiparisOlusturDTO siparisOlusturDTO;
         MenuService menuService;
         SepetService sepetService { get; set; }
         SiparisService siparisService { get; set; }
-        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,IBaseRepository<Siparis> baseRepository1)
+        SiparisMenulerService siparisMenulerService { get; set; }
+        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,IBaseRepository<Siparis> baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository)
         {
             siparisService = new(baseRepository1);
             menuService = new(baseRepository);
             sepetService = new(_baseRepository);
-            this.baseRepository = baseRepository;
-            this._baseRepository = _baseRepository;
-            this.baseRepository1=baseRepository1;
+            siparisMenulerService = new(araTabloRepository);
+
+            //this.baseRepository = baseRepository;
+            //this._baseRepository = _baseRepository;
+            //this.baseRepository1=baseRepository1;
             siparisOlusturDTO = new();
             siparisOlusturDTO.Menuler = menuService.GetAll();
         }
@@ -77,21 +80,30 @@ namespace Proje.UI.Areas.User.Controllers
             };
             return View(sepetiOnaylaDTO);
         }
-        public IActionResult SiparisOnayla()
+        
+        public IActionResult SiparisOnayla(string id)
         {
-            List<Sepet> sepetIcerigi = sepetService.GetWhereAll(x => x.AktifMi == true);
+            Siparis siparis = new()
+            {
+                UserID = id
+			};
+            siparisService.Add(siparis);
+			List<Sepet> sepetIcerigi = sepetService.GetWhereAll(x => x.AktifMi == true);
             foreach(var item in sepetIcerigi)
             {
                 if (item.MenuID != null)
                 {
-
+                    SiparislerMenuler siparislerMenu = new SiparislerMenuler()
+                    {
+                        SiparisID = siparis.ID,
+                        MenuID = (int)item.MenuID,
+                        Boyut = item.Boyut,
+                        Adet = item.Adet,
+                        TotalFiyat = item.Fiyat
+                    };
+                    siparisMenulerService.Add(siparislerMenu);
                 }
             }
-
-			Siparis siparis = new()
-            {
-
-            };
             foreach(var item in sepetService.GetWhereAll(x => x.AktifMi == true))
             {
 
