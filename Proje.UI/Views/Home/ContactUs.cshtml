@@ -1,0 +1,94 @@
+﻿@model ContactUsDTO
+
+
+<div class="container-xxl py-5 bg-dark hero-header mb-5">
+    <div class="container text-center my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Bize Ulaşın</h1>
+    </div>
+</div>
+<div class="container d-flex justify-content-center align-items-center">
+
+    <!-- Contact Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Bize Ulaşın</h5>
+                <h1 class="mb-5">Her konuda bizimle iletişime geçebilirsiniz</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="row gy-4">
+                        @* <div class="col-md-4">
+                            <h5 class="section-title ff-secondary fw-normal text-start text-primary">Booking</h5>
+                            <p><i class="fa fa-envelope-open text-primary me-2"></i>book@example.com</p>
+                        </div> *@
+                        <div class="col-md-4">
+                            <h5 class="section-title ff-secondary fw-normal text-start text-primary">Mail adresimiz</h5>
+                            <p><i class="fa fa-envelope-open text-primary me-2"></i>makaburger4@gmail.com</p>
+                        </div>
+                        @* <div class="col-md-4">
+                            <h5 class="section-title ff-secondary fw-normal text-start text-primary">Technical</h5>
+                            <p><i class="fa fa-envelope-open text-primary me-2"></i>tech@example.com</p>
+                        </div> *@
+                    </div>
+                </div>
+                <div class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
+                    <iframe class="position-relative rounded w-100 h-100"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.3050378102985!2d29.016585476462126!3d40.99669622013735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab843c0cfb469%3A0x4aa41af48681c847!2sHaydarpa%C5%9Fa!5e0!3m2!1str!2str!4v1699615041209!5m2!1str!2str"
+                            frameborder="0" style="min-height: 350px; border:0;" allowfullscreen="" aria-hidden="false"
+                            tabindex="0"></iframe>
+                </div>
+                <div class="col-md-6">
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+
+
+                        <form asp-action="ContactUs" asp-controller="Home" method="post">
+                            <h1 class="title text-center mb-4">Bize Ulaşın</h1>
+
+                            <!-- Name -->
+                            <div class="form-group position-relative">
+                                <label for="Name" class="d-block">
+                                    <i class="icon" data-feather="user"></i>
+                                </label>
+                                <input type="text" asp-for="Name" class="form-control form-control-lg thick" placeholder="Adınız ve soyadınız" required>
+                            </div>
+                            <br />
+                            <div class="form-group position-relative">
+                                <label for="formName" class="d-block">
+                                    <i class="icon" data-feather="user"></i>
+                                </label>
+                                <input type="email" asp-for="Email" class="form-control form-control-lg thick" placeholder="Email adresiniz" required>
+                            </div>
+                            <br />
+                            <!-- E-mail -->
+                            <div class="form-group position-relative">
+                                <label for="formEmail" class="d-block">
+                                    <i class="icon" data-feather="mail"></i>
+                                </label>
+                                <input type="text" asp-for="Subject" class="form-control form-control-lg thick" placeholder="Konu" required>
+                            </div>
+                            <br />
+                            <!-- Message -->
+                            <div class="form-group message">
+                                <textarea asp-for="Message" class="form-control form-control-lg" rows="7" placeholder="Mesajınız" required></textarea>
+                            </div>
+                            <br />
+                            <!-- Submit btn -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" tabIndex="-1">Gönder</button>
+                            </div>
+                        </form>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+</div>
+<div class="bg-danger text-white" asp-validation-summary="All"></div>
+

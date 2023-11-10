@@ -14,6 +14,7 @@ namespace Proje.BLL.AutoMapper
         public MappingProfile()
         {
             CreateMap<RegisterDTO, AppUser>();
+            CreateMap<UpdateUserDTO, AppUser>().ReverseMap().ForMember(x => x.UserId, opt => opt.MapFrom(x => x.Id));
         }
     }
 }

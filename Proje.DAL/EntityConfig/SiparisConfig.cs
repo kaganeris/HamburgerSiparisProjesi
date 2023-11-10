@@ -14,7 +14,6 @@ namespace Proje.DAL.EntityConfig
         {
             base.Configure(builder);
 
-            builder.Property(x => x.Adet).IsRequired();
 
             builder.HasOne(x => x.AppUser).WithMany(x => x.Siparisler).HasForeignKey(x => x.UserID);
         }
