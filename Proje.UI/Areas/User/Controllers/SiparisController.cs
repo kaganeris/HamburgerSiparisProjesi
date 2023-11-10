@@ -35,6 +35,7 @@ namespace Proje.UI.Areas.User.Controllers
             siparisOlusturDTO = new();
             siparisOlusturDTO.Menuler = menuService.GetAll();
         }
+       
         public IActionResult SiparisOlustur()
         {
             return View(siparisOlusturDTO);

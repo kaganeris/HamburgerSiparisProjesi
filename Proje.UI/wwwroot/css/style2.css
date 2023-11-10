@@ -1,21 +1,4 @@
-html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
 
 h2 {
     text-align: center;
@@ -33,8 +16,8 @@ h2 {
 
 .product {
     overflow: hidden;
-    background: #ffbf00;
-    color: #ffbf00;
+    background: #0f172b;
+    color: #0f172b;
     text-align: center;
     width: 240px;
     height: 400px;
@@ -80,4 +63,3 @@ h2 {
     .product a:hover {
         transform: scale(1.1);
     }
-
