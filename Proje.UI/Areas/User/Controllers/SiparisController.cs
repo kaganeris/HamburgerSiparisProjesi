@@ -73,12 +73,12 @@ namespace Proje.UI.Areas.User.Controllers
             return PartialView("_Menuler",siparisOlusturDTO);
         }
 
-        public IActionResult SepetiOnayla()
+        public IActionResult SepetiOnayla(string id)
         {
             SepetiOnaylaDTO sepetiOnaylaDTO = new()
             {
-                Sepettekiler = sepetService.GetWhereAll(x => x.AktifMi == true)
-            };
+                Sepettekiler = sepetService.GetWhereAll(x => x.UserId == id)
+			};
             return View(sepetiOnaylaDTO);
         }
         
@@ -144,11 +144,15 @@ namespace Proje.UI.Areas.User.Controllers
         [HttpPost]
         public IActionResult SepetTemizle(SepetTemizleDTO sepetTemizleDTO)
         {
-            foreach(Sepet item in sepetService.GetWhereAll(x=>x.UserId==sepetTemizleDTO.userId))
+            int sonEklenenId = sepetService.GetAll().Max(x => x.ID);
+            foreach(Sepet item in sepetService.GetWhereAll(x=>x.UserId==sepetTemizleDTO.userId && x.ID!= sonEklenenId))
             {
                 sepetService.Delete(item);
             }
-            SiparisGonderDTO siparisGonderDTO = new();
+            SiparisGonderDTO siparisGonderDTO = new()
+            {
+                Sepettekiler = sepetService.GetSepetIncludeMenu(sepetTemizleDTO.userId)
+            };
             return PartialView("_SiparisListesi", siparisGonderDTO);
         }
         [HttpPost]

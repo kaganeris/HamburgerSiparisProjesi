@@ -1,9 +1,12 @@
-﻿@using Proje.BLL.Models.DTOs;
-
+﻿@using Microsoft.AspNetCore.Identity;
+@using Proje.BLL.Models.DTOs;
+@using Proje.DATA.Entities;
+@inject UserManager<AppUser> UserManager
 
 @model SiparisGonderDTO
 @{
 	decimal totalFiyat = 0;
+	AppUser user = await UserManager.GetUserAsync(User);
 }
 <table class="table table-hover table-warning">
 	<tr>
@@ -35,4 +38,7 @@
 		<td>@totalFiyat TL</td>
 	</tr>
 </table>
-<a class="btn product-btn btn-secondary" asp-action="SepetiOnayla">Siparişi Tamamla</a>
+<div>
+	<input type="hidden" value="@user.Id" id="userID" />
+</div>
+<a class="btn product-btn btn-secondary" asp-action="SepetiOnayla" asp-route-id="@user.Id">Siparişi Tamamla</a>

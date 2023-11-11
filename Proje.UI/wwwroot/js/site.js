@@ -4,7 +4,7 @@
 function SiparisGonder(id) {
     let SiparisData = {
         MenuID : id,
-        Boyut: $("#boyut").val(),
+        Boyut: $("input[type='radio']:checked").val(),
         Adet: $('#adet').val(),
         UserID: $('#userID').val(),
         Ekleme: $('#ekleme').val()
@@ -109,6 +109,7 @@ function SepetYukle() {
         }
     })
 }
+
 
 
 

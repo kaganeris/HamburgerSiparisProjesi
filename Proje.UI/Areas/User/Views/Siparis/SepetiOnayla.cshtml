@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity;
+﻿@*@using Microsoft.AspNetCore.Identity;
 @using Proje.BLL.Models.DTOs;
 @using Proje.DATA.Entities;
 @model SepetiOnaylaDTO
@@ -48,7 +48,51 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
+    @using Microsoft.AspNetCore.Identity;
+@using Proje.BLL.Models.DTOs;
+@using Proje.DATA.Entities;
+@inject UserManager<AppUser> UserManager
+
+@model SepetiOnaylaDTO
+@{
+	decimal totalFiyat = 0;
+	AppUser user = await UserManager.GetUserAsync(User);
+}
+<table class="table table-hover table-warning">
+	<tr>
+		<th>Ürünleriniz</th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	@foreach (var item in Model.Sepettekiler)
+	{
+		totalFiyat += item.Fiyat;
+		<tr>
+			<td><img class="img-fluid" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Menu.Fotograf)"></td>
+			<td>@item.Menu.Adi @item.Boyut.ToString() x @item.Adet.ToString()</td>
+			<td><button type="button" class="btn btn-outline-danger" onclick="SepettenSil(@item.ID)">-</button></td>
+			<td>@item.Adet</td>
+			<td><button type="button" class="btn btn-outline-success" onclick="AdetArttır(@item.ID)">+</button></td>
+			<td>@item.Fiyat TL</td>
+		</tr>
+	}
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>@totalFiyat TL</td>
+	</tr>
+</table>
+<div>
+	<input type="hidden" value="@user.Id" id="userID" />
+</div>
+<a class="btn product-btn btn-secondary" asp-action="SiparisOnayla" asp-route-id="@user.Id">Siparişi Tamamla</a>
 
 
 
