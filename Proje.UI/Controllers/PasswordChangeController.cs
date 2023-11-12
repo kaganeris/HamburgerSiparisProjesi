@@ -27,15 +27,26 @@ namespace Proje.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> ForgetPassword(ForgetPasswordVM forgetPasswordVM)
         {
-            var user = await userManager.FindByEmailAsync(forgetPasswordVM.Mail);
-            string passwordResetToken = await userManager.GeneratePasswordResetTokenAsync(user);
-            var passwordResetTokenLink = Url.Action("ResetPassword", "PasswordChange", new
+            if (ModelState.IsValid)
             {
-                userId = user.Id,
-                token = passwordResetToken
-            }, HttpContext.Request.Scheme);
+                var user = await userManager.FindByEmailAsync(forgetPasswordVM.Mail);
+                if (user == null)
+                {
+                    ViewBag.Uyarı = "Kayıtlı E-mail bulunamadı!";
+                    return View();
+                }
+                string passwordResetToken = await userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResetTokenLink = Url.Action("ResetPassword", "PasswordChange", new
+                {
+                    userId = user.Id,
+                    token = passwordResetToken
+                }, HttpContext.Request.Scheme);
 
-            SendEmail(forgetPasswordVM.Mail,passwordResetTokenLink);
+                SendEmail(forgetPasswordVM.Mail, passwordResetTokenLink);
+                ViewBag.Tamamlandı = "Şifre yenileme bağlantısı başarıyla iletildi!";
+                return View();
+            }
+
 
             return View();
         }

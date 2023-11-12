@@ -11,7 +11,18 @@
         </li class="nav-item">
     }
     <li class="nav-item">
+        <a class="nav-link text-dark" asp-action="Logout" asp-controller="User">Siparişlerim</a>
+    </li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link text-dark" asp-action="Logout" asp-controller="User">Çıkış Yap</a>
+    </li class="nav-item">
+    <li class="nav-item">
+       <a class="nav-link text-dark">
+            <div class="shopping">
+                <img src="~/template2/img/shopping.png" />
+                <span class="quantity">0</span>
+            </div>
+       </a>
     </li class="nav-item">
 }
 else
