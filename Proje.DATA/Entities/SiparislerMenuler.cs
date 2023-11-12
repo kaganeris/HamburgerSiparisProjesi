@@ -9,6 +9,7 @@ namespace Proje.DATA.Entities
 {
     public class SiparislerMenuler
     {
+        public int ID { get; set; }
         public int SiparisID { get; set; }
         public int MenuID { get; set; }
         public Siparis Siparis { get; set; }

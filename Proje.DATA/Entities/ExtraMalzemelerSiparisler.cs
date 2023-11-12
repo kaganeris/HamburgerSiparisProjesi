@@ -9,6 +9,7 @@ namespace Proje.DATA.Entities
 {
     public class ExtraMalzemelerSiparisler
     {
+        public int ID { get; set; }
         [ForeignKey("ExtraMalzeme")]
         public int ExtraMalzemeID { get; set; }
 
