@@ -15,6 +15,7 @@
                         <tr>
                             <th>Ekstra Malzeme Adı</th>
                             <th>Fiyatı</th>
+                            <th>Çeşidi</th>
                             <th>İşlemler</th>
                         </tr>
                     </thead>
@@ -29,8 +30,11 @@
                                     @item.Fiyat ₺
                                 </td>
                                 <td>
-                                    <button class="btn btn-info"><a asp-action="Edit" asp-controller="ExtraMalzeme" asp-area="Admin" asp-route-id="@item.ID">Düzenle</a></button> |
-                                    <button class="btn btn-info"><a asp-action="Delete" asp-controller="ExtraMalzeme" asp-area="Admin" asp-route-id="@item.ID">Sil</a></button>
+                                    @item.Cesit
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning"><a asp-action="Edit" asp-controller="ExtraMalzeme" asp-area="Admin" asp-route-id="@item.ID">Düzenle</a></button> |
+                                    <button class="btn btn-danger"><a asp-action="Delete" asp-controller="ExtraMalzeme" asp-area="Admin" asp-route-id="@item.ID">Sil</a></button>
                                 </td>
                             </tr>
                         }

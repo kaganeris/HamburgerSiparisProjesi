@@ -364,3 +364,5 @@ FodyWeavers.xsd
 /Proje.UI/appsettings.json
 /Proje.DAL/Migrations/20231108100710_init.cs
 /Proje.DAL/Migrations/AppDbContextModelSnapshot.cs
+/Proje.DAL/Migrations/20231112193151_init.cs
+/Proje.DAL/Migrations/20231112193151_init.Designer.cs

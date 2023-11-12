@@ -61,6 +61,7 @@ namespace Proje.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Adi = table.Column<string>(type: "nvarchar(65)", maxLength: 65, nullable: false),
                     Fiyat = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Cesit = table.Column<int>(type: "int", nullable: false),
                     OlusturmaZamani = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GuncellemeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SilinmeZamani = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -261,12 +262,14 @@ namespace Proje.DAL.Migrations
                 name: "ExtraMalzemelerSiparisler",
                 columns: table => new
                 {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ExtraMalzemeID = table.Column<int>(type: "int", nullable: false),
                     SiparisID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExtraMalzemelerSiparisler", x => new { x.ExtraMalzemeID, x.SiparisID });
+                    table.PrimaryKey("PK_ExtraMalzemelerSiparisler", x => x.ID);
                     table.ForeignKey(
                         name: "FK_ExtraMalzemelerSiparisler_ExtraMalzemeler_ExtraMalzemeID",
                         column: x => x.ExtraMalzemeID,
@@ -285,6 +288,8 @@ namespace Proje.DAL.Migrations
                 name: "SiparislerMenuler",
                 columns: table => new
                 {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     SiparisID = table.Column<int>(type: "int", nullable: false),
                     MenuID = table.Column<int>(type: "int", nullable: false),
                     Adet = table.Column<int>(type: "int", nullable: false),
@@ -293,7 +298,7 @@ namespace Proje.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SiparislerMenuler", x => new { x.SiparisID, x.MenuID });
+                    table.PrimaryKey("PK_SiparislerMenuler", x => x.ID);
                     table.ForeignKey(
                         name: "FK_SiparislerMenuler_Menuler_MenuID",
                         column: x => x.MenuID,
@@ -348,6 +353,11 @@ namespace Proje.DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExtraMalzemelerSiparisler_ExtraMalzemeID",
+                table: "ExtraMalzemelerSiparisler",
+                column: "ExtraMalzemeID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ExtraMalzemelerSiparisler_SiparisID",
                 table: "ExtraMalzemelerSiparisler",
                 column: "SiparisID");
@@ -376,6 +386,11 @@ namespace Proje.DAL.Migrations
                 name: "IX_SiparislerMenuler_MenuID",
                 table: "SiparislerMenuler",
                 column: "MenuID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SiparislerMenuler_SiparisID",
+                table: "SiparislerMenuler",
+                column: "SiparisID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
