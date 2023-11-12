@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proje.BLL.Models.DTOs.ExtraMalzeme
+namespace Proje.BLL.Models.DTOs.ExtraMalzemeDTO
 {
     public class CreateExtraMalzemeDTO
     {
