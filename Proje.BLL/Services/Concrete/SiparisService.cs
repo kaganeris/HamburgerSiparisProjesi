@@ -17,5 +17,10 @@ namespace Proje.BLL.Services.Concrete
         {
             this.baseRepository = baseRepository;
         }
+
+        public List<Siparis> GetSiparisIncludeMenu()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
