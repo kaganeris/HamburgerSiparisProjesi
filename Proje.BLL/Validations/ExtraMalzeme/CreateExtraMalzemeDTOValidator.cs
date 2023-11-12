@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Proje.BLL.Models.DTOs.ExtraMalzeme;
+using Proje.BLL.Models.DTOs.ExtraMalzemeDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
