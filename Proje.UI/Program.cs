@@ -39,6 +39,7 @@ namespace Proje.UI
             builder.Services.AddTransient(typeof(ISepetService),typeof(SepetService));
             builder.Services.AddTransient(typeof(ISiparisMenulerService),typeof(SiparisMenulerService));
             builder.Services.AddTransient(typeof(IExtraMalzemelerService),typeof(ExtraMalzemelerService));
+            builder.Services.AddTransient(typeof(IExtraMalzemelerSiparislerService),typeof(ExtraMalzemelerSiparislerService));
 
             builder.Services.AddAutoMapper(typeof(MenuMapProfile));
 
