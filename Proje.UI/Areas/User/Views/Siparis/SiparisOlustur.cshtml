@@ -73,6 +73,53 @@
                                                             </tr>
 
                                                         </table>
+                                                        <h3>Soslar</h3>
+                                                        
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Soslar</th>
+                                                            </tr>
+                                                            @foreach (ExtraMalzeme item in Model.ExtraMalzemeler)
+                                                            {
+                                                                if (item.Cesit == Cesit.Sos)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@item.Adi</td>
+                                                                        <td>@item.Fiyat</td>
+                                                                    </tr>
+                                                                }
+                                                                
+                                                            }
+                                                            <tr>
+                                                                <th colspan="2">Aperatifler</th>
+                                                            </tr>
+                                                            @foreach (ExtraMalzeme item in Model.ExtraMalzemeler)
+                                                            {
+                                                                if (item.Cesit == Cesit.Aperatif)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@item.Adi</td>
+                                                                        <td>@item.Fiyat</td>
+                                                                    </tr>
+                                                                }
+
+                                                            }
+                                                            <tr>
+                                                                <th colspan="2">Tatlılar</th>
+                                                            </tr>
+                                                            @foreach (ExtraMalzeme item in Model.ExtraMalzemeler)
+                                                            {
+                                                                if (item.Cesit == Cesit.Tatlı)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@item.Adi</td>
+                                                                        <td>@item.Fiyat</td>
+                                                                    </tr>
+                                                                }
+
+                                                            }
+                                                            
+                                                        </table>
                                                     </form>
                                                     
                                                 </div>

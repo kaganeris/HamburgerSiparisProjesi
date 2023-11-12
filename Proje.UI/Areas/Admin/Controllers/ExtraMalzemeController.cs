@@ -2,7 +2,7 @@
 using MessagePack;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Proje.BLL.Models.DTOs.ExtraMalzeme;
+using Proje.BLL.Models.DTOs.ExtraMalzemeDTO;
 using Proje.BLL.Services.Abstract;
 using Proje.BLL.Validations.ExtraMalzeme;
 using Proje.DAL.Context;
