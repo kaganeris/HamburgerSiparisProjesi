@@ -9,5 +9,6 @@ namespace Proje.BLL.Services.Abstract
 {
     public interface ISiparisService : IBaseService<Siparis>
     {
+        List<Siparis> GetSiparisIncludeMenu();
     }
 }

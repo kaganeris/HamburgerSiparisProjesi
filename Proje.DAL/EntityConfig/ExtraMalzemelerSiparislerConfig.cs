@@ -15,7 +15,7 @@ namespace Proje.DAL.EntityConfig
         {
             //builder.HasKey(x => new { x.SiparisID, x.ExtraMalzemeID });
 
-            builder.HasKey("ExtraMalzemeID", "SiparisID");
+            builder.HasKey("ID");
         }
     }
 }
