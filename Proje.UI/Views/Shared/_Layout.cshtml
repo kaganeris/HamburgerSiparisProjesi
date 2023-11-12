@@ -36,8 +36,17 @@
 
 </head>
 <body>
-    
-
+    <div class="Sepet d-inline">
+        <h1>Sepet</h1>
+        <ul class="listSepet">
+        </ul>
+        <div class="d-flex flex-column bottom tamam"><button class="btn btn-primary">Siparişi Tamamla</button></div>
+        <div class="checkOut">
+            
+            <div class="total">0</div>
+            <div class="closeShopping">Close</div>
+        </div>
+    </div>
     <!-- Navbar & Hero Start -->
     <header>
         <div class="container-xxl position-relative p-0">
@@ -176,6 +185,7 @@
 
     <!-- Template Javascript -->
     <script src="~/template2/js/main.js"></script>
+    <script src="~/js/sepet.js"></script>
 
     
     @await RenderSectionAsync("Scripts", required: false)
