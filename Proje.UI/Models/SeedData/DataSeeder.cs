@@ -66,6 +66,43 @@ namespace Proje.UI.Models.SeedData
                 }
                 context.SaveChanges();
 
+                if (!context.ExtraMalzemeler.Any())
+                {
+                    List<ExtraMalzeme> extras = new List<ExtraMalzeme>()
+                    {
+                        new ExtraMalzeme()
+                        {
+                            Adi="Ranch Sos", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Sos,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        }, 
+                        new ExtraMalzeme()
+                        {
+                            Adi="Barbekü Sos", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Sos,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                         new ExtraMalzeme()
+                        {
+                            Adi="Sufle", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Tatlı,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                          new ExtraMalzeme()
+                        {
+                            Adi="Patates Kızartması", Fiyat=45 ,Cesit=DATA.Enums.Cesit.Aperatif,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                          new ExtraMalzeme()
+                        {
+                            Adi="Mac&Cheese Balls", Fiyat=60 ,Cesit=DATA.Enums.Cesit.Aperatif,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                          new ExtraMalzeme()
+                        {
+                            Adi="Mozarella Sticks", Fiyat=70 ,Cesit=DATA.Enums.Cesit.Aperatif,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                          new ExtraMalzeme()
+                        {
+                            Adi="Dondurma", Fiyat=20 ,Cesit=DATA.Enums.Cesit.Tatlı,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                    };
+                    context.ExtraMalzemeler.AddRange(extras);
+                }
+                context.SaveChanges();
+
 
             }
         }

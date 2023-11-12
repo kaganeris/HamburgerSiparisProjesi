@@ -34,9 +34,9 @@ namespace Proje.DAL.Repositories
             return context.Siparisler.Include(x => x.ExtraMalzemelerSiparisler).ToList();
         }
 
-        public List<Siparis> GetSiparisListIncludeSiparisMenuler()
+        public List<Siparis> GetUsersSiparisListIncludeSiparisMenuler(string id)
         {
-            return context.Siparisler.Include(x => x.SiparislerMenuler).ToList();
+            return context.Siparisler.Include(x => x.SiparislerMenuler).Where(x => x.UserID == id).ToList();
         }
 
 		public List<Siparis> GetSiparisListPiecesGreaterThan(int pieces)

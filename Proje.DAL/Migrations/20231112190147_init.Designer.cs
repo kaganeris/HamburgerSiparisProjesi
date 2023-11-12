@@ -12,7 +12,7 @@ using Proje.DAL.Context;
 namespace Proje.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231110114855_init")]
+    [Migration("20231112190147_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,6 +255,9 @@ namespace Proje.DAL.Migrations
                     b.Property<bool>("AktifMi")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Cesit")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Fiyat")
                         .HasColumnType("decimal(18,2)");
 
@@ -274,13 +277,21 @@ namespace Proje.DAL.Migrations
 
             modelBuilder.Entity("Proje.DATA.Entities.ExtraMalzemelerSiparisler", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
                     b.Property<int>("ExtraMalzemeID")
                         .HasColumnType("int");
 
                     b.Property<int>("SiparisID")
                         .HasColumnType("int");
 
-                    b.HasKey("ExtraMalzemeID", "SiparisID");
+                    b.HasKey("ID");
+
+                    b.HasIndex("ExtraMalzemeID");
 
                     b.HasIndex("SiparisID");
 
@@ -406,11 +417,11 @@ namespace Proje.DAL.Migrations
 
             modelBuilder.Entity("Proje.DATA.Entities.SiparislerMenuler", b =>
                 {
-                    b.Property<int>("SiparisID")
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("MenuID")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<int>("Adet")
                         .HasColumnType("int");
@@ -418,12 +429,20 @@ namespace Proje.DAL.Migrations
                     b.Property<int>("Boyut")
                         .HasColumnType("int");
 
+                    b.Property<int>("MenuID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SiparisID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TotalFiyat")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("SiparisID", "MenuID");
+                    b.HasKey("ID");
 
                     b.HasIndex("MenuID");
+
+                    b.HasIndex("SiparisID");
 
                     b.ToTable("SiparislerMenuler");
                 });

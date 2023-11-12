@@ -1,4 +1,5 @@
 ﻿using Proje.DATA.Entities;
+using Proje.DATA.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Proje.BLL.Models.DTOs.ExtraMalzemeDTO
     {
         public string Adi { get; set; }
         public decimal Fiyat { get; set; }
+        public Cesit Cesit { get; set; }
     }
 }

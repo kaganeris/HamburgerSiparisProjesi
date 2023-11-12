@@ -26,9 +26,13 @@ namespace Proje.UI.Areas.User.Controllers
         SiparisService siparisService;
         SiparisMenulerService siparisMenulerService;
 
+<<<<<<< HEAD
         private readonly ExtraMalzemelerService extraMalzemelerService;
 
         public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,IBaseRepository<Siparis> baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository,AppDbContext context,UserManager<AppUser> userManager,IBaseRepository<ExtraMalzeme> baseRepository2)
+=======
+        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,ISiparisRepository baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository,AppDbContext context,UserManager<AppUser> userManager)
+>>>>>>> 671f99b4987e0f925da8ae217aa1c40b53463fdd
 
         {
             siparisService = new(baseRepository1);
@@ -152,17 +156,17 @@ namespace Proje.UI.Areas.User.Controllers
 			siparisGonderDTO.Sepettekiler = sepetService.GetWhereAll(x => x.AktifMi == true);
 			return PartialView("_SiparisListesi", siparisGonderDTO);
 		}
-     public async Task<IActionResult> Siparis()
+     public IActionResult Siparis()
         {
             var userIDClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
 
             string userID = userIDClaim.Value;
 
-            AppUser appUser = await userManager.FindByIdAsync(userID);
+            List<Siparis> siparis = siparisService.GetSiparisIncludeMenu(userID);
 
-            List<Siparis> siparis;
-            return View();
+            return View(siparis);
         }
+
         [HttpPost]
         public IActionResult SepetTemizle(SepetTemizleDTO sepetTemizleDTO)
         {

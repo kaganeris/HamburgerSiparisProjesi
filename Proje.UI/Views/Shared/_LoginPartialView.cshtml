@@ -7,11 +7,13 @@
     @if (User.IsInRole("Admin"))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-action="Index" asp-controller="Menu" asp-area="Admin">Admin Panel</a>
+            <a class="nav-link text-dark"  asp-action="Index" asp-controller="Menu" asp-area="Admin">Admin Panel</a>
         </li class="nav-item">
     }
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-action="Logout" asp-controller="User">Siparişlerim</a>
+
+        <a class="nav-link text-dark" asp-area="User" asp-action="Siparis" asp-controller="Siparis">Siparişlerim</a>
+
     </li class="nav-item">
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-action="Logout" asp-controller="User">Çıkış Yap</a>
