@@ -12,7 +12,7 @@ using Proje.DAL.Context;
 namespace Proje.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231112190147_init")]
+    [Migration("20231112194707_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
