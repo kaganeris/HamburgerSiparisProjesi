@@ -1,4 +1,6 @@
 ﻿using Proje.BLL.Services.Abstract;
+using Proje.DAL.Context;
+using Proje.DAL.Repositories;
 using Proje.DATA.Entities;
 using Proje.DATA.Repositories;
 using System;
@@ -11,16 +13,16 @@ namespace Proje.BLL.Services.Concrete
 {
     public class SiparisService : BaseService<Siparis> , ISiparisService
     {
-        private readonly IBaseRepository<Siparis> baseRepository;
+        private readonly ISiparisRepository sp;
 
-        public SiparisService(IBaseRepository<Siparis> baseRepository) : base(baseRepository) 
+        public SiparisService(ISiparisRepository sp) : base(sp)
         {
-            this.baseRepository = baseRepository;
+            this.sp = sp;
         }
 
-        public List<Siparis> GetSiparisIncludeMenu()
+        public List<Siparis> GetSiparisIncludeMenu(string id)
         {
-            throw new NotImplementedException();
+            return sp.GetUsersSiparisListIncludeSiparisMenuler(id);
         }
     }
 }

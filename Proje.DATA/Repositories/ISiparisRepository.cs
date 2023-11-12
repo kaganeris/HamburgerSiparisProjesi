@@ -10,7 +10,7 @@ namespace Proje.DATA.Repositories
     public interface ISiparisRepository : IBaseRepository<Siparis>
     {
         Siparis GetSiparisIncludeSiparisMenuler();
-        List<Siparis> GetSiparisListIncludeSiparisMenuler();
+        List<Siparis> GetUsersSiparisListIncludeSiparisMenuler(string id);
         Siparis GetSiparisIncludeExtraMalzemelerSiparisler();
         List<Siparis> GetSiparisListIncludeExtraMalzemelerSiparisler();
 
