@@ -1,18 +1,19 @@
 ﻿
 
 using Proje.BLL.Services.Abstract;
+using Proje.DAL.Context;
+using Proje.DAL.Repositories;
 using Proje.DATA.Entities;
 using Proje.DATA.Repositories;
 
 namespace Proje.BLL.Services.Concrete
 {
-	public class SepetService : BaseService<Sepet>, ISepetService
+	public class SepetService : SepetRepository, ISepetService
     {
-		private readonly IBaseRepository<Sepet> _baseRepository;
+		private readonly AppDbContext context;
 
-		public SepetService(IBaseRepository<Sepet> baseRepository) : base(baseRepository)
+		public SepetService(AppDbContext context) : base(context)
 		{
-			_baseRepository = baseRepository;
 
 		}
 

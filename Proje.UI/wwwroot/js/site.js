@@ -1,13 +1,13 @@
 ﻿
 
 
-function SiparisGonder() {
+function SiparisGonder(id) {
     let SiparisData = {
-        MenuID : $("input[type='radio']:checked").val(),
-        Boyut: $("#boyut option:selected").val(),
+        MenuID : id,
+        Boyut: $("input[type='radio']:checked").val(),
         Adet: $('#adet').val(),
-        UserID: $('#userID').val()
-
+        UserID: $('#userID').val(),
+        Ekleme: $('#ekleme').val()
     }
     $.ajax({
         url: "/User/Siparis/SiparisGonder",
@@ -44,6 +44,62 @@ function SepettenSil(siparisID) {
         type: "POST",
         dataType: "html",
         data: sepetData,
+        success: function (response) {
+            console.log(response)
+            $('#siparisListesi').html(response);
+        },
+        error: function (data) {
+            console.log("Hata Oluştu")
+        }
+    })
+}
+function AdetArttır(siparisID) {
+    let AdetArttırData = {
+        sepetID: siparisID
+    }
+    $.ajax({
+        url: "/User/Siparis/AdetArttır",
+        type: "POST",
+        dataType: "html",
+        data: AdetArttırData,
+        success: function (response) {
+            console.log(response)
+            $('#siparisListesi').html(response);
+        },
+        error: function (data) {
+            console.log("Hata Oluştu")
+        }
+    })
+}
+
+function SepetTemizle() {
+    let SepetTemizleData = {
+        userId: $('#userID').val()
+    }
+    $.ajax({
+        url: "/User/Siparis/SepetTemizle",
+        type: "POST",
+        dataType: "html",
+        data: SepetTemizleData,
+        success: function (response) {
+            console.log(response)
+            $('#siparisListesi').html(response);
+        },
+        error: function (data) {
+            console.log("Hata Oluştu")
+        }
+    })
+}
+
+function SepetYukle() {
+    let SepetYukleData = {
+        userId: $('#userID').val()
+    }
+    $.ajax({
+        url: "/User/Siparis/SepetYukle",
+        type: "POST",
+        dataType: "html",
+        data: SepetYukleData,
         success: function (response) {
             console.log(response)
             $('#siparisListesi').html(response);

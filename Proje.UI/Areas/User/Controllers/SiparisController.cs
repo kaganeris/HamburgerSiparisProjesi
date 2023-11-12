@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Proje.BLL.Models.DTOs;
 using Proje.BLL.Services.Concrete;
+using Proje.DAL.Context;
 using Proje.DATA.Entities;
 using Proje.DATA.Enums;
 using Proje.DATA.Repositories;
 using System.Data;
+using System.Security.Claims;
 
 namespace Proje.UI.Areas.User.Controllers
 {
@@ -13,27 +16,26 @@ namespace Proje.UI.Areas.User.Controllers
     [Authorize(Roles = "Musteri,Admin")]
     public class SiparisController : Controller
     {
-        //private readonly IBaseRepository<Menu> baseRepository;
-        //private readonly IBaseRepository<Sepet> _baseRepository;
-        //private readonly IBaseRepository<Siparis> baseRepository1;
 
 		SiparisOlusturDTO siparisOlusturDTO;
         MenuService menuService;
+        private readonly UserManager<AppUser> userManager;
+
         SepetService sepetService { get; set; }
         SiparisService siparisService { get; set; }
         SiparisMenulerService siparisMenulerService { get; set; }
-        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,IBaseRepository<Siparis> baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository)
+
+        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,IBaseRepository<Siparis> baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository,AppDbContext context,UserManager<AppUser> userManager)
+
         {
             siparisService = new(baseRepository1);
             menuService = new(baseRepository);
-            sepetService = new(_baseRepository);
+            sepetService = new(context);
             siparisMenulerService = new(araTabloRepository);
 
-            //this.baseRepository = baseRepository;
-            //this._baseRepository = _baseRepository;
-            //this.baseRepository1=baseRepository1;
             siparisOlusturDTO = new();
             siparisOlusturDTO.Menuler = menuService.GetAll();
+            this.userManager = userManager;
         }
        
         public IActionResult SiparisOlustur()
@@ -62,7 +64,12 @@ namespace Proje.UI.Areas.User.Controllers
             };
             
             sepetService.Add(sepet);
-            siparisGonderDTO.Sepettekiler=sepetService.GetWhereAll(x=>x.AktifMi==true);
+            siparisGonderDTO.Sepettekiler = sepetService.GetSepetIncludeMenu(siparisGonderDTO.UserID);
+
+            if(siparisGonderDTO.Sepettekiler.Count > 1 && siparisGonderDTO.ekleme==1)
+            {
+                return PartialView("_SepetTemizlensinMi", siparisGonderDTO);
+            }
 
             return PartialView("_SiparisListesi",siparisGonderDTO);
         }
@@ -73,12 +80,12 @@ namespace Proje.UI.Areas.User.Controllers
             return PartialView("_Menuler",siparisOlusturDTO);
         }
 
-        public IActionResult SepetiOnayla()
+        public IActionResult SepetiOnayla(string id)
         {
             SepetiOnaylaDTO sepetiOnaylaDTO = new()
             {
-                Sepettekiler = sepetService.GetWhereAll(x => x.AktifMi == true)
-            };
+                Sepettekiler = sepetService.GetWhereAll(x => x.UserId == id)
+			};
             return View(sepetiOnaylaDTO);
         }
         
@@ -89,8 +96,8 @@ namespace Proje.UI.Areas.User.Controllers
                 UserID = id
 			};
             siparisService.Add(siparis);
-			List<Sepet> sepetIcerigi = sepetService.GetWhereAll(x => x.AktifMi == true);
-            foreach(var item in sepetIcerigi)
+			List<Sepet> sepetIcerigi = sepetService.GetWhereAll(x => x.UserId == id);
+            foreach(Sepet item in sepetIcerigi)
             {
                 if (item.MenuID != null)
                 {
@@ -103,29 +110,77 @@ namespace Proje.UI.Areas.User.Controllers
                         TotalFiyat = item.Fiyat
                     };
                     siparisMenulerService.Add(siparislerMenu);
+                    sepetService.Delete(item);
                 }
             }
-            foreach(var item in sepetService.GetWhereAll(x => x.AktifMi == true))
-            {
 
-                sepetService.Delete(item);
-            }
 
             return RedirectToAction("SiparisOlustur");
         }
         [HttpPost]
         public IActionResult SepettenSil(SepettenSilDTO sepettenSilDTO)
         {
-
-            sepetService.Delete(sepetService.GetWhere(x => x.ID == sepettenSilDTO.sepetID));
+            Sepet sepet = (sepetService.GetWhere(x => x.ID == sepettenSilDTO.sepetID));
+            if (sepet.Adet > 1)
+            {
+                sepet.Fiyat = (sepet.Fiyat/sepet.Adet)*(sepet.Adet-1);
+                sepet.Adet--;
+                sepetService.Update(sepet);
+            }
+            else
+            {
+                sepetService.Delete(sepet);
+            }
             SiparisGonderDTO siparisGonderDTO = new();
 			siparisGonderDTO.Sepettekiler = sepetService.GetWhereAll(x => x.AktifMi == true);
 
 			return PartialView("_SiparisListesi", siparisGonderDTO);
 		}
+        [HttpPost]
+        public IActionResult AdetArttır(SepettenSilDTO sepettenSilDTO)
+        {
+            Sepet sepet = (sepetService.GetWhere(x => x.ID == sepettenSilDTO.sepetID));
+			sepet.Fiyat = (sepet.Fiyat / sepet.Adet) * (sepet.Adet + 1);
+			sepet.Adet++;
+            sepetService.Update(sepet);
+            SiparisGonderDTO siparisGonderDTO = new();
+			siparisGonderDTO.Sepettekiler = sepetService.GetWhereAll(x => x.AktifMi == true);
+			return PartialView("_SiparisListesi", siparisGonderDTO);
+		}
+     public async Task<IActionResult> Siparis()
+        {
+            var userIDClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
 
+            string userID = userIDClaim.Value;
 
+            AppUser appUser = await userManager.FindByIdAsync(userID);
 
+            List<Siparis> siparis;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SepetTemizle(SepetTemizleDTO sepetTemizleDTO)
+        {
+            int sonEklenenId = sepetService.GetAll().Max(x => x.ID);
+            foreach(Sepet item in sepetService.GetWhereAll(x=>x.UserId==sepetTemizleDTO.userId && x.ID!= sonEklenenId))
+            {
+                sepetService.Delete(item);
+            }
+            SiparisGonderDTO siparisGonderDTO = new()
+            {
+                Sepettekiler = sepetService.GetSepetIncludeMenu(sepetTemizleDTO.userId)
+            };
+            return PartialView("_SiparisListesi", siparisGonderDTO);
+        }
+        [HttpPost]
+        public IActionResult SepetYukle(SepetTemizleDTO sepetTemizleDTO)
+        {
+            SiparisGonderDTO siparisGonderDTO = new()
+            {
+                Sepettekiler = sepetService.GetWhereAll(x => x.UserId == sepetTemizleDTO.userId)
+            };
+            return PartialView("_SiparisListesi", siparisGonderDTO);
+        }
 
     }
 }

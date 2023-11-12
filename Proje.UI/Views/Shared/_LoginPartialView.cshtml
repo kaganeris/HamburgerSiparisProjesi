@@ -7,19 +7,30 @@
     @if (User.IsInRole("Admin"))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-action="Index" asp-controller="Menu" asp-area="Admin">Admin Panel</a>
+            <a class="nav-link text-dark" asp-area="" asp-action="Index" asp-controller="Menu" asp-area="Admin">Admin Panel</a>
         </li class="nav-item">
     }
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-action="Logout" asp-controller="User">Çıkış Yap</a>
+        <a class="nav-link text-dark" asp-area="" asp-action="Logout" asp-controller="User">Siparişlerim</a>
+    </li class="nav-item">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-action="Logout" asp-controller="User">Çıkış Yap</a>
+    </li class="nav-item">
+    <li class="nav-item">
+       <a class="nav-link text-dark">
+            <div class="shopping">
+                <img src="~/template2/img/shopping.png" />
+                <span class="quantity">0</span>
+            </div>
+       </a>
     </li class="nav-item">
 }
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-action="Login" asp-controller="User">Giriş Yap</a>
+        <a class="nav-link text-dark" asp-area="" asp-action="Login" asp-controller="User">Giriş Yap</a>
     </li class="nav-item">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-action="Register" asp-controller="User">Kayıt Ol</a>
+        <a class="nav-link text-dark" asp-area="" asp-action="Register" asp-controller="User">Kayıt Ol</a>
     </li class="nav-item">
 }

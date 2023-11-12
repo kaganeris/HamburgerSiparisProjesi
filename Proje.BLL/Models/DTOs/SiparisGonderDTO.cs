@@ -21,5 +21,6 @@ namespace Proje.BLL.Models.DTOs
         public int Adet { get; set; }
         public List<Sepet> Sepettekiler { get; set; }
         public string UserID { get; set; }
+        public int ekleme { get; set; }
     }
 }
