@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Proje.BLL.Models.DTOs;
+using Proje.BLL.Services.Abstract;
 using Proje.BLL.Services.Concrete;
 using Proje.DAL.Context;
 using Proje.DATA.Entities;
@@ -21,20 +22,28 @@ namespace Proje.UI.Areas.User.Controllers
         MenuService menuService;
         private readonly UserManager<AppUser> userManager;
 
-        SepetService sepetService { get; set; }
-        SiparisService siparisService { get; set; }
-        SiparisMenulerService siparisMenulerService { get; set; }
+        SepetService sepetService;
+        SiparisService siparisService;
+        SiparisMenulerService siparisMenulerService;
 
+<<<<<<< HEAD
+        private readonly ExtraMalzemelerService extraMalzemelerService;
+
+        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,IBaseRepository<Siparis> baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository,AppDbContext context,UserManager<AppUser> userManager,IBaseRepository<ExtraMalzeme> baseRepository2)
+=======
         public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,ISiparisRepository baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository,AppDbContext context,UserManager<AppUser> userManager)
+>>>>>>> 671f99b4987e0f925da8ae217aa1c40b53463fdd
 
         {
             siparisService = new(baseRepository1);
             menuService = new(baseRepository);
             sepetService = new(context);
             siparisMenulerService = new(araTabloRepository);
+            extraMalzemelerService = new(baseRepository2);
 
             siparisOlusturDTO = new();
             siparisOlusturDTO.Menuler = menuService.GetAll();
+            siparisOlusturDTO.ExtraMalzemeler= extraMalzemelerService.GetAll();
             this.userManager = userManager;
         }
        

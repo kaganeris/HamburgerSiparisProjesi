@@ -15,8 +15,10 @@ namespace Proje.BLL.Models.DTOs
         public SiparisOlusturDTO()
         {
             Menuler = new();
+            ExtraMalzemeler = new();
         }
         public List<Menu> Menuler { get; set; }
         public Boyut Boyut { get; set; }
+        public List<ExtraMalzeme> ExtraMalzemeler { get; set; } 
     }
 }
