@@ -82,7 +82,7 @@ namespace Proje.UI.Areas.User.Controllers
             return PartialView("_SiparisListesi",siparisGonderDTO);
         }
         [HttpPost]
-        public IActionResult BoyutDegistir(SiparisGonderDTO siparisGonderDTO)
+        public IActionResult MalzemeDegistir(SiparisGonderDTO siparisGonderDTO)
         {
             siparisOlusturDTO.Boyut = siparisGonderDTO.Boyut;
             return PartialView("_Menuler",siparisOlusturDTO);
