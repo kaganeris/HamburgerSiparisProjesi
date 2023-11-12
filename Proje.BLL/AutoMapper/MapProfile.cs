@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Proje.BLL.Models.DTOs.ExtraMalzeme;
+using Proje.BLL.Models.DTOs.ExtraMalzemeDTO;
 using Proje.DATA.Entities;
 using System;
 using System.Collections.Generic;
