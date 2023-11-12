@@ -8,7 +8,6 @@ function SiparisGonder(id) {
         Adet: $('#adet').val(),
         UserID: $('#userID').val(),
         Ekleme: $('#ekleme').val(),
-        MalzemeIDs: 
     }
     
     $.ajax({
