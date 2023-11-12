@@ -19,7 +19,7 @@ namespace Proje.DAL.EntityConfig
             builder.HasOne(x => x.Siparis)
                 .WithMany(x => x.SiparislerMenuler)
                 .HasForeignKey(x => x.SiparisID);
-            builder.HasKey(x => new { x.SiparisID, x.MenuID });
+            builder.HasKey("ID");
         }
     }
 }

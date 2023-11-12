@@ -83,4 +83,57 @@ h2 {
 .product-price{
     color: black;
 }
+/*#modalTable {
+    margin: 0;
+    width: 400px;
+    color: black;
+}*/
+.modal-content{
+    padding:0;
+    margin:0;
+    background-color:white;
+}
+.modal-body{
+    color:black;
+    display:flex;
+    justify-content:center;
+}
+.modal-header{
+    display:flex;
+    justify-content:center
+}
+    .modal-header img {
+        width:100%;
+        height:100%
+    }
+/*.model-body table{
+    width:100%;
+    
+}*/
+#modalform{
+    width:80%;
+    text-align:initial;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+}
+#modalform h2{
+    text-align:center;
+}
+/*.model-body tr{
+    width:100%;
+}*/
+#siparisTablosu{
+    display:flex;
+    justify-content:center;
+    width:70%;
+
+}
+#siparisTablosu img{
+    display:flex;
+    justify-content:center;
+    width:300px;
+
+}
+
 
