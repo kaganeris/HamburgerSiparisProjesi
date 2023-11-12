@@ -9,6 +9,6 @@ namespace Proje.DATA.Repositories
 {
 	public interface ISepet :IBaseRepository<Sepet>
 	{
-
+		List<Sepet> GetSepetIncludeMenu(string userId);
 	}
 }

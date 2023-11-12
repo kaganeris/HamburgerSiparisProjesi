@@ -1,4 +1,5 @@
-﻿using Proje.DAL.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Proje.DAL.Context;
 using Proje.DATA.Entities;
 using Proje.DATA.Repositories;
 using System;
@@ -17,6 +18,22 @@ namespace Proje.DAL.Repositories
 		{
 			this.context = context;
 		}
+        public override bool Delete(Sepet item)
+        {
+            try
+            {
+                context.Set<Sepet>().Remove(item);
+                return Save() > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
-	}
+        public List<Sepet> GetSepetIncludeMenu(string userId)
+        {
+            return context.Set<Sepet>().Where(x=>x.UserId==userId).Include(x=>x.Menu).ToList();
+        }
+    }
 }

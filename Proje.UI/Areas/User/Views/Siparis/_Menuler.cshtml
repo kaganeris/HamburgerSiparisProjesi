@@ -18,16 +18,26 @@
 		</tr>
 		@foreach (Menu menu in Model.Menuler)
 		{
-			<tr>
-				<td>@menu.Adi</td>
-				@{
-					decimal fiyat = menu.Fiyat * BoyutCarpani;
-				}
-				<td>@fiyat</td>
-				<td>
-					<input type="radio" name="menuID" value="@menu.ID" />
-				</td>
-			</tr>
+			// <tr>
+			// 	<td>@menu.Adi</td>
+			// 	@{
+			// 		decimal fiyat = menu.Fiyat * BoyutCarpani;
+			// 	}
+			// 	<td>@fiyat</td>
+			// 	<td>
+			// 		<input type="radio" name="menuID" value="@menu.ID" />
+			// 	</td>
+			// </tr>
+			<div class="product">
+				<img class="img-fluid" src="data:image/jpeg;base64,@Convert.ToBase64String(menu.Fotograf)">
+				<div class="product-info">
+					<h4 class="product-title">
+					@menu.Adi
+					</h4>
+					<p class="product-price">@menu.Fiyat</p>
+					<a class="product-btn" href="#">Sepete Ekle</a>
+				</div>
+			</div>
 		}
 	</table>
 </div>
