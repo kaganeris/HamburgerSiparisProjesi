@@ -1,9 +1,10 @@
 ﻿@using Proje.BLL.Models.DTOs.ExtraMalzeme
+@using Proje.DATA.Enums;
 @model UpdateExtraMalzemeDTO
 @{
     ViewData["Title"] = "Edit";
 }
-<div class="col-lg-6 offset-5 grid margin stretch-card" style="width: 320px">
+<div class="col-lg-6 offset-5 grid margin stretch-card" style="width: 350px">
     <div class="card">
         <div class="card-header">
             <div class="card-body">
@@ -20,6 +21,11 @@
                         <label asp-for="Fiyat" class="control-label">Fiyatı</label>
                         <input type="text" style="width:250px" asp-for="Fiyat" class="form-control" />
                         <span asp-validation-for="Fiyat" class="text-danger"></span>
+                        <br />
+                        <label for="Cesit"  class="control-label">Ekstra Malzeme Türü</label>
+                        <select asp-for="Cesit" style="width:250px" asp-items="Html.GetEnumSelectList<Cesit>()" class="form-control">
+                            <option value="">-- Seçiniz --</option>
+                        </select>
                     </div>
                     <br />
                     <div class="form-group">
