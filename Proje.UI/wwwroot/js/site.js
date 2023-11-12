@@ -54,4 +54,3 @@ function SepettenSil(siparisID) {
     })
 }
 
-

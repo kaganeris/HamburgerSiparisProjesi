@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Proje.BLL.Models.DTOs;
 using Proje.BLL.Services.Concrete;
@@ -6,6 +7,7 @@ using Proje.DATA.Entities;
 using Proje.DATA.Enums;
 using Proje.DATA.Repositories;
 using System.Data;
+using System.Security.Claims;
 
 namespace Proje.UI.Areas.User.Controllers
 {
@@ -19,10 +21,12 @@ namespace Proje.UI.Areas.User.Controllers
 
 		SiparisOlusturDTO siparisOlusturDTO;
         MenuService menuService;
+        private readonly UserManager<AppUser> userManager;
+
         SepetService sepetService { get; set; }
         SiparisService siparisService { get; set; }
         SiparisMenulerService siparisMenulerService { get; set; }
-        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,IBaseRepository<Siparis> baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository)
+        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,IBaseRepository<Siparis> baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository,UserManager<AppUser> userManager)
         {
             siparisService = new(baseRepository1);
             menuService = new(baseRepository);
@@ -34,6 +38,7 @@ namespace Proje.UI.Areas.User.Controllers
             //this.baseRepository1=baseRepository1;
             siparisOlusturDTO = new();
             siparisOlusturDTO.Menuler = menuService.GetAll();
+            this.userManager = userManager;
         }
         public IActionResult SiparisOlustur()
         {
@@ -123,6 +128,18 @@ namespace Proje.UI.Areas.User.Controllers
 			return PartialView("_SiparisListesi", siparisGonderDTO);
 		}
 
+
+        public async Task<IActionResult> Siparis()
+        {
+            var userIDClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+
+            string userID = userIDClaim.Value;
+
+            AppUser appUser = await userManager.FindByIdAsync(userID);
+
+            List<Siparis> siparis;
+            return View();
+        }
 
 
 
