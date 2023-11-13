@@ -53,10 +53,10 @@ namespace Proje.UI.Models.SeedData
                         }
                         List<Menu> menuler = new List<Menu>()
                     {
-                        new Menu() {Adi = "Big King",Fiyat = 150,Fotograf = imageBytes[0], AktifMi = true,OlusturmaZamani = DateTime.Now },
-                        new Menu() {Adi = "Whopper",Fiyat = 170,Fotograf = imageBytes[1],AktifMi = true,OlusturmaZamani = DateTime.Now},
-                        new Menu() {Adi = "King Chicken",Fiyat = 120,Fotograf = imageBytes[2], AktifMi = true, OlusturmaZamani = DateTime.Now},
-                        new Menu() {Adi = "Big Mac",Fiyat = 150,Fotograf = imageBytes[3], AktifMi = true, OlusturmaZamani = DateTime.Now},
+                        new Menu() {Adi = "Classic",Fiyat = 150,Fotograf = imageBytes[0], AktifMi = true,OlusturmaZamani = DateTime.Now },
+                        new Menu() {Adi = "CheeseBurger",Fiyat = 170,Fotograf = imageBytes[1],AktifMi = true,OlusturmaZamani = DateTime.Now},
+                        new Menu() {Adi = "Acılı Burger",Fiyat = 120,Fotograf = imageBytes[2], AktifMi = true, OlusturmaZamani = DateTime.Now},
+                        new Menu() {Adi = "DoubleBurger",Fiyat = 150,Fotograf = imageBytes[3], AktifMi = true, OlusturmaZamani = DateTime.Now},
                         new Menu() {Adi = "Tavuk Burger",Fiyat = 100,Fotograf = imageBytes[4], AktifMi = true,OlusturmaZamani = DateTime.Now},
 
                     };
@@ -70,6 +70,16 @@ namespace Proje.UI.Models.SeedData
                 {
                     List<ExtraMalzeme> extras = new List<ExtraMalzeme>()
                     {
+                        new ExtraMalzeme()
+                        {
+                            Adi="Ketçap", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Sos,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        }, 
+
+                        new ExtraMalzeme()
+                        {
+                            Adi="Mayonez", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Sos,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        }, 
+
                         new ExtraMalzeme()
                         {
                             Adi="Ranch Sos", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Sos,AktifMi = true, OlusturmaZamani = DateTime.Now
