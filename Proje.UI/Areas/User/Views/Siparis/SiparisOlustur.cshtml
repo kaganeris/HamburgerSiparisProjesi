@@ -77,7 +77,7 @@
                                                         
                                                         <table>
                                                             <tr>
-                                                                <th colspan="2">Soslar</th>
+                                                                <th colspan="2">Ücretsiz Sos Seçimi</th>
                                                             </tr>
                                                             @foreach (ExtraMalzeme item in Model.ExtraMalzemeler)
                                                             {
@@ -85,35 +85,23 @@
                                                                 {
                                                                     <tr>
                                                                         <td>@item.Adi</td>
-                                                                        <td>@item.Fiyat</td>
+                                                                        <td>Ücretsiz</td>
+                                                                        <td><input type="radio" value="@item.ID" name="sos1" /></td>
                                                                     </tr>
                                                                 }
                                                                 
                                                             }
                                                             <tr>
-                                                                <th colspan="2">Aperatifler</th>
+                                                                <th colspan="2">Ücretsiz Sos Seçimi</th>
                                                             </tr>
                                                             @foreach (ExtraMalzeme item in Model.ExtraMalzemeler)
                                                             {
-                                                                if (item.Cesit == Cesit.Aperatif)
+                                                                if (item.Cesit == Cesit.Sos)
                                                                 {
                                                                     <tr>
                                                                         <td>@item.Adi</td>
-                                                                        <td>@item.Fiyat</td>
-                                                                    </tr>
-                                                                }
-
-                                                            }
-                                                            <tr>
-                                                                <th colspan="2">Tatlılar</th>
-                                                            </tr>
-                                                            @foreach (ExtraMalzeme item in Model.ExtraMalzemeler)
-                                                            {
-                                                                if (item.Cesit == Cesit.Tatlı)
-                                                                {
-                                                                    <tr>
-                                                                        <td>@item.Adi</td>
-                                                                        <td>@item.Fiyat</td>
+                                                                        <td>Ücretsiz</td>
+                                                                        <td><input type="radio" value="@item.ID" name="sos2" /> </td>
                                                                     </tr>
                                                                 }
 

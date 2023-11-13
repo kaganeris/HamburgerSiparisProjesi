@@ -80,12 +80,29 @@ namespace Proje.UI.Areas.User.Controllers
 
             return PartialView("_SiparisListesi",siparisGonderDTO);
         }
-        [HttpPost]
-        public IActionResult BoyutDegistir(SiparisGonderDTO siparisGonderDTO)
-        {
-            siparisOlusturDTO.Boyut = siparisGonderDTO.Boyut;
-            return PartialView("_Menuler",siparisOlusturDTO);
-        }
+        //[HttpPost]
+        //public IActionResult MalzemeDegistir(SiparisGonderDTO siparisGonderDTO)
+        //{
+
+        //    Sepet sepet = new()
+        //    {
+        //        ExtraMalzemeID = siparisGonderDTO.MalzemeID,
+        //        UserId = siparisGonderDTO.UserID,
+        //        Fiyat = extraMalzemelerService.GetWhere(x => x.ID == siparisGonderDTO.MalzemeID).Fiyat,
+        //        Adet = 1,
+        //        Boyut=Boyut.Küçük
+        //    };
+        //    if (sepetService.GetWhere(x => x.UserId == siparisGonderDTO.UserID && x.ExtraMalzemeID == siparisGonderDTO.MalzemeID) == null)
+        //    {
+        //        sepetService.Add(sepet);
+        //    }
+        //    else
+        //    {
+        //        sepetService.Delete(sepet);
+        //    }
+            
+        //    return PartialView("_Menuler",siparisOlusturDTO);
+        //}
 
         public IActionResult SepetiOnayla(string id)
         {

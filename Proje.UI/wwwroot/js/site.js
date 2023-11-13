@@ -7,8 +7,11 @@ function SiparisGonder(id) {
         Boyut: $("input[type='radio']:checked").val(),
         Adet: $('#adet').val(),
         UserID: $('#userID').val(),
-        Ekleme: $('#ekleme').val()
+        Ekleme: $('#ekleme').val(),
+        Sos1ID: $('input[name="sos1"]:checked').val(),
+        Sos2ID: $('input[name="sos2"]:checked').val(),
     }
+    
     $.ajax({
         url: "/User/Siparis/SiparisGonder",
         type: "POST",
@@ -23,18 +26,22 @@ function SiparisGonder(id) {
         }
     })
 }
-$('#boyut').change(function () {
+function malzemeEkle(id) {
+    let MalzemeData = {
+        UserID: $('#userID').val(),
+        MalzemeID: id
+    }
     $.ajax({
-        url: "/User/Siparis/BoyutDegistir",
-        data: { Boyut: $("#boyut option:selected").val() },
+        url: "/User/Siparis/MalzemeDegistir",
+        data: MalzemeData,
         dataType: "html",
         type: "post",
         success: function (response) {
-            $('#menuler').html(response)
+            
         }
 
     });
-});
+};
 function SepettenSil(siparisID) {
     let sepetData={
         sepetID : siparisID
