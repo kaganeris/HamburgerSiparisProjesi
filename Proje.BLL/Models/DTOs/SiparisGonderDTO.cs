@@ -23,5 +23,7 @@ namespace Proje.BLL.Models.DTOs
         public string UserID { get; set; }
         public int ekleme { get; set; }
         public int MalzemeID { get; set; }
+        public int Sos1ID { get; set; }
+        public int Sos2ID { get;set; }
     }
 }

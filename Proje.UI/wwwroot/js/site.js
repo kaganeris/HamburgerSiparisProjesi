@@ -8,6 +8,8 @@ function SiparisGonder(id) {
         Adet: $('#adet').val(),
         UserID: $('#userID').val(),
         Ekleme: $('#ekleme').val(),
+        Sos1ID: $('input[name="sos1"]:checked').val(),
+        Sos2ID: $('input[name="sos2"]:checked').val(),
     }
     
     $.ajax({
@@ -25,7 +27,8 @@ function SiparisGonder(id) {
     })
 }
 function malzemeEkle(id) {
-    let MalzemeData={
+    let MalzemeData = {
+        UserID: $('#userID').val(),
         MalzemeID: id
     }
     $.ajax({
@@ -38,7 +41,7 @@ function malzemeEkle(id) {
         }
 
     });
-});
+};
 function SepettenSil(siparisID) {
     let sepetData={
         sepetID : siparisID
