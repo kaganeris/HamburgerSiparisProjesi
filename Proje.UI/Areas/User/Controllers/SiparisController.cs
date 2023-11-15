@@ -40,7 +40,7 @@ namespace Proje.UI.Areas.User.Controllers
             extraMalzemelerService = new(baseRepository2);
 
             siparisOlusturDTO = new();
-            siparisOlusturDTO.Menuler = menuService.GetAll();
+            siparisOlusturDTO.Menuler = menuService.GetWhereAll(x => x.AktifMi == true);
             siparisOlusturDTO.ExtraMalzemeler= extraMalzemelerService.GetAll();
             this.userManager = userManager;
             this.extraMalzemelerSiparislerService = extraMalzemelerSiparislerService;

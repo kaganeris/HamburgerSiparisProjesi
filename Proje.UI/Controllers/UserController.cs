@@ -16,7 +16,7 @@ namespace Proje.UI.Controllers
         private readonly SignInManager<AppUser> signInManager;
         private readonly IMapper mapper;
 
-        public UserController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager,IMapper mapper)
+        public UserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -35,28 +35,26 @@ namespace Proje.UI.Controllers
             if (valid.IsValid)
             {
                 AppUser appUser = await userManager.FindByNameAsync(loginDTO.UserName);
-                if(appUser == null)
+                if (appUser == null)
                 {
                     ViewBag.Uyarı = "Bu isimde kayıtlı kullanıcı bulunmamaktadır.";
                     return View();
+                }
+                else if (appUser.EmailConfirmed == false)
+                {
+                    TempData["Mail"] = appUser.Email;
+                    return RedirectToAction("Index", "ConfirmMail");
                 }
                 else
                 {
                     await signInManager.SignOutAsync();
 
-                    Microsoft.AspNetCore.Identity.SignInResult signInResult = await signInManager.PasswordSignInAsync(appUser, loginDTO.Password,true,false);
+                    Microsoft.AspNetCore.Identity.SignInResult signInResult = await signInManager.PasswordSignInAsync(appUser, loginDTO.Password, true, false);
 
                     if (signInResult.Succeeded)
                     {
-                        if(appUser.EmailConfirmed == true)
-                        {
-                            return RedirectToAction("Index", "Home");
-                        }
-                        else
-                        {
-                            TempData["Mail"] = appUser.Email;
-                            return RedirectToAction("Index", "ConfirmMail");
-                        }
+                        return RedirectToAction("Index", "Home");
+
                     }
                     ViewBag.Uyarı = "Kullanıcı Adı veya Şifre Hatalı!";
                     return View();
@@ -79,19 +77,19 @@ namespace Proje.UI.Controllers
         {
             RegisterDTOValidator validator = new();
             var valid = validator.Validate(registerDTO);
-            if(valid.IsValid)
+            if (valid.IsValid)
             {
                 Random random = new Random();
                 int code = random.Next(100000, 1000000);
                 AppUser appUser = mapper.Map<AppUser>(registerDTO);
                 appUser.ConfirmCode = code;
                 IdentityResult result = await userManager.CreateAsync(appUser, registerDTO.Password);
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     SendEmail(appUser.Email, code);
                     TempData["Mail"] = appUser.Email;
                     await userManager.AddToRoleAsync(appUser, "Musteri");
-                    return RedirectToAction("Index","ConfirmMail");
+                    return RedirectToAction("Index", "ConfirmMail");
                 }
                 else
                 {
@@ -110,7 +108,7 @@ namespace Proje.UI.Controllers
 
             }
             return View();
-            
+
         }
 
         public async Task<IActionResult> Logout()
