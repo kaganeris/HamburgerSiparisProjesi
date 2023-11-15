@@ -1,10 +1,13 @@
-﻿@using Proje.BLL.Models.DTOs.ExtraMalzeme
+
+﻿@using Proje.BLL.Models.DTOs.ExtraMalzemeDTO
+@using Proje.DATA.Enums;
+
 @model CreateExtraMalzemeDTO
 @{
     ViewData["Title"] = "Create";
 }
 
-<div class="col-lg-6 offset-5 grid margin stretch-card" style="width: 320px">
+<div class="col-lg-6 offset-5 grid margin stretch-card" style="width: 350px">
     <div class="card">
         <div class="card-header">
             <div class="card-body">
@@ -16,8 +19,15 @@
                         <input type="text" style="width:250px" name="Adi" placeholder="Ekstra Malzeme Adı" asp-for="Adi" class="form-control" />
                         <span asp-validation-for="Adi" class="text-danger"></span>
                         <br />
+                        
                         <label for="Fiyat" class="control-label">Ekstra Malzeme Fiyatı</label>
                         <input type="text" style="width:250px" name="Fiyat" type="number" min="0" placeholder="1.0" step="0.1" asp-for="Fiyat" class="form-control" />
+                        <br />
+                        <label for="Cesit" class="control-label">Ekstra Malzeme Türü</label>
+                        <select asp-for="Cesit" style="width:250px" asp-items="Html.GetEnumSelectList<Cesit>()" class="form-control">
+                            <option value="">-- Seçiniz --</option>
+                        </select>
+
                         <span asp-validation-for="Fiyat" class="text-danger"></span>
                     </div>
                     <br />

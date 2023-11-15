@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using Proje.BLL.Models.DTOs;
+using Proje.BLL.Services.Abstract;
 using Proje.BLL.Validations;
 
 using Proje.DATA.Entities;
@@ -14,15 +15,18 @@ namespace Proje.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMenuService menuService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IMenuService menuService)
         {
             _logger = logger;
+            this.menuService = menuService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Menu> menuler = menuService.GetAll();
+            return View(menuler);
         }
 
         public IActionResult ContactUs()

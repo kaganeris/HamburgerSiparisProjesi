@@ -46,8 +46,7 @@ namespace Proje.UI.Controllers
                 ViewBag.Tamamlandı = "Şifre yenileme bağlantısı başarıyla iletildi!";
                 return View();
             }
-
-
+            ViewBag.Uyarı = "Kayıtlı E-mail bulunamadı!";
             return View();
         }
 

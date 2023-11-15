@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Proje.BLL.Models.DTOs;
+using Proje.BLL.Services.Abstract;
 using Proje.BLL.Services.Concrete;
 using Proje.DAL.Context;
+using Proje.DAL.Repositories;
 using Proje.DATA.Entities;
 using Proje.DATA.Enums;
 using Proje.DATA.Repositories;
@@ -20,22 +22,28 @@ namespace Proje.UI.Areas.User.Controllers
 		SiparisOlusturDTO siparisOlusturDTO;
         MenuService menuService;
         private readonly UserManager<AppUser> userManager;
+        private readonly IExtraMalzemelerSiparislerService extraMalzemelerSiparislerService;
+        SepetService sepetService;
+        SiparisService siparisService;
+        SiparisMenulerService siparisMenulerService;
 
-        SepetService sepetService { get; set; }
-        SiparisService siparisService { get; set; }
-        SiparisMenulerService siparisMenulerService { get; set; }
 
-        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,IBaseRepository<Siparis> baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository,AppDbContext context,UserManager<AppUser> userManager)
+        private readonly ExtraMalzemelerService extraMalzemelerService;
+
+        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,ISiparisRepository baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository,AppDbContext context,UserManager<AppUser> userManager,IBaseRepository<ExtraMalzeme> baseRepository2,IExtraMalzemelerSiparislerService extraMalzemelerSiparislerService)
 
         {
             siparisService = new(baseRepository1);
             menuService = new(baseRepository);
             sepetService = new(context);
             siparisMenulerService = new(araTabloRepository);
+            extraMalzemelerService = new(baseRepository2);
 
             siparisOlusturDTO = new();
-            siparisOlusturDTO.Menuler = menuService.GetAll();
+            siparisOlusturDTO.Menuler = menuService.GetWhereAll(x => x.AktifMi == true);
+            siparisOlusturDTO.ExtraMalzemeler= extraMalzemelerService.GetAll();
             this.userManager = userManager;
+            this.extraMalzemelerSiparislerService = extraMalzemelerSiparislerService;
         }
        
         public IActionResult SiparisOlustur()
@@ -73,12 +81,29 @@ namespace Proje.UI.Areas.User.Controllers
 
             return PartialView("_SiparisListesi",siparisGonderDTO);
         }
-        [HttpPost]
-        public IActionResult BoyutDegistir(SiparisGonderDTO siparisGonderDTO)
-        {
-            siparisOlusturDTO.Boyut = siparisGonderDTO.Boyut;
-            return PartialView("_Menuler",siparisOlusturDTO);
-        }
+        //[HttpPost]
+        //public IActionResult MalzemeDegistir(SiparisGonderDTO siparisGonderDTO)
+        //{
+
+        //    Sepet sepet = new()
+        //    {
+        //        ExtraMalzemeID = siparisGonderDTO.MalzemeID,
+        //        UserId = siparisGonderDTO.UserID,
+        //        Fiyat = extraMalzemelerService.GetWhere(x => x.ID == siparisGonderDTO.MalzemeID).Fiyat,
+        //        Adet = 1,
+        //        Boyut=Boyut.Küçük
+        //    };
+        //    if (sepetService.GetWhere(x => x.UserId == siparisGonderDTO.UserID && x.ExtraMalzemeID == siparisGonderDTO.MalzemeID) == null)
+        //    {
+        //        sepetService.Add(sepet);
+        //    }
+        //    else
+        //    {
+        //        sepetService.Delete(sepet);
+        //    }
+            
+        //    return PartialView("_Menuler",siparisOlusturDTO);
+        //}
 
         public IActionResult SepetiOnayla(string id)
         {
@@ -147,17 +172,17 @@ namespace Proje.UI.Areas.User.Controllers
 			siparisGonderDTO.Sepettekiler = sepetService.GetWhereAll(x => x.AktifMi == true);
 			return PartialView("_SiparisListesi", siparisGonderDTO);
 		}
-     public async Task<IActionResult> Siparis()
+     public IActionResult Siparis()
         {
             var userIDClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
 
             string userID = userIDClaim.Value;
 
-            AppUser appUser = await userManager.FindByIdAsync(userID);
+            List<Siparis> siparis = siparisService.GetSiparisIncludeMenu(userID);
 
-            List<Siparis> siparis;
-            return View();
+            return View(siparis);
         }
+
         [HttpPost]
         public IActionResult SepetTemizle(SepetTemizleDTO sepetTemizleDTO)
         {

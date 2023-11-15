@@ -73,6 +73,41 @@
                                                             </tr>
 
                                                         </table>
+                                                        <h3>Soslar</h3>
+                                                        
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Ücretsiz Sos Seçimi</th>
+                                                            </tr>
+                                                            @foreach (ExtraMalzeme item in Model.ExtraMalzemeler)
+                                                            {
+                                                                if (item.Cesit == Cesit.Sos)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@item.Adi</td>
+                                                                        <td>Ücretsiz</td>
+                                                                        <td><input type="radio" value="@item.ID" name="sos1" /></td>
+                                                                    </tr>
+                                                                }
+                                                                
+                                                            }
+                                                            <tr>
+                                                                <th colspan="2">Ücretsiz Sos Seçimi</th>
+                                                            </tr>
+                                                            @foreach (ExtraMalzeme item in Model.ExtraMalzemeler)
+                                                            {
+                                                                if (item.Cesit == Cesit.Sos)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@item.Adi</td>
+                                                                        <td>Ücretsiz</td>
+                                                                        <td><input type="radio" value="@item.ID" name="sos2" /> </td>
+                                                                    </tr>
+                                                                }
+
+                                                            }
+                                                            
+                                                        </table>
                                                     </form>
                                                     
                                                 </div>

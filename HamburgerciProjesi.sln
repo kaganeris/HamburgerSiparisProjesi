@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proje.UI", "Proje.UI\Proje.UI.csproj", "{FA08913B-C460-4C46-9314-4937C7EFA76D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proje.UI", "Proje.UI\Proje.UI.csproj", "{FA08913B-C460-4C46-9314-4937C7EFA76D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proje.DATA", "Proje.DATA\Proje.DATA.csproj", "{C90C2216-20AC-44EF-A9B0-11848AA9E742}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proje.DATA", "Proje.DATA\Proje.DATA.csproj", "{C90C2216-20AC-44EF-A9B0-11848AA9E742}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proje.DAL", "Proje.DAL\Proje.DAL.csproj", "{A80EA0D7-9818-4D77-8BD9-2C1D5F6CA034}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proje.DAL", "Proje.DAL\Proje.DAL.csproj", "{A80EA0D7-9818-4D77-8BD9-2C1D5F6CA034}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proje.BLL", "Proje.BLL\Proje.BLL.csproj", "{B8FE6BC6-062D-425E-9FE8-FC5257752B3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proje.BLL", "Proje.BLL\Proje.BLL.csproj", "{B8FE6BC6-062D-425E-9FE8-FC5257752B3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Proje Ekran Görüntüleri", "Proje Ekran Görüntüleri", "{1AB28029-2329-4543-B2DD-7BB163DB1240}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

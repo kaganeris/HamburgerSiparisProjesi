@@ -53,16 +53,63 @@ namespace Proje.UI.Models.SeedData
                         }
                         List<Menu> menuler = new List<Menu>()
                     {
-                        new Menu() {Adi = "Big King",Fiyat = 150,Fotograf = imageBytes[0], AktifMi = true,OlusturmaZamani = DateTime.Now },
-                        new Menu() {Adi = "Whopper",Fiyat = 170,Fotograf = imageBytes[1],AktifMi = true,OlusturmaZamani = DateTime.Now},
-                        new Menu() {Adi = "King Chicken",Fiyat = 120,Fotograf = imageBytes[2], AktifMi = true, OlusturmaZamani = DateTime.Now},
-                        new Menu() {Adi = "Big Mac",Fiyat = 150,Fotograf = imageBytes[3], AktifMi = true, OlusturmaZamani = DateTime.Now},
+                        new Menu() {Adi = "Classic",Fiyat = 150,Fotograf = imageBytes[0], AktifMi = true,OlusturmaZamani = DateTime.Now },
+                        new Menu() {Adi = "CheeseBurger",Fiyat = 170,Fotograf = imageBytes[1],AktifMi = true,OlusturmaZamani = DateTime.Now},
+                        new Menu() {Adi = "Acılı Burger",Fiyat = 120,Fotograf = imageBytes[2], AktifMi = true, OlusturmaZamani = DateTime.Now},
+                        new Menu() {Adi = "DoubleBurger",Fiyat = 150,Fotograf = imageBytes[3], AktifMi = true, OlusturmaZamani = DateTime.Now},
                         new Menu() {Adi = "Tavuk Burger",Fiyat = 100,Fotograf = imageBytes[4], AktifMi = true,OlusturmaZamani = DateTime.Now},
 
                     };
                         context.Menuler.AddRange(menuler);
                     }
 
+                }
+                context.SaveChanges();
+
+                if (!context.ExtraMalzemeler.Any())
+                {
+                    List<ExtraMalzeme> extras = new List<ExtraMalzeme>()
+                    {
+                        new ExtraMalzeme()
+                        {
+                            Adi="Ketçap", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Sos,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        }, 
+
+                        new ExtraMalzeme()
+                        {
+                            Adi="Mayonez", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Sos,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        }, 
+
+                        new ExtraMalzeme()
+                        {
+                            Adi="Ranch Sos", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Sos,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        }, 
+                        new ExtraMalzeme()
+                        {
+                            Adi="Barbekü Sos", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Sos,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                         new ExtraMalzeme()
+                        {
+                            Adi="Sufle", Fiyat=5 ,Cesit=DATA.Enums.Cesit.Tatlı,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                          new ExtraMalzeme()
+                        {
+                            Adi="Patates Kızartması", Fiyat=45 ,Cesit=DATA.Enums.Cesit.Aperatif,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                          new ExtraMalzeme()
+                        {
+                            Adi="Mac&Cheese Balls", Fiyat=60 ,Cesit=DATA.Enums.Cesit.Aperatif,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                          new ExtraMalzeme()
+                        {
+                            Adi="Mozarella Sticks", Fiyat=70 ,Cesit=DATA.Enums.Cesit.Aperatif,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                          new ExtraMalzeme()
+                        {
+                            Adi="Dondurma", Fiyat=20 ,Cesit=DATA.Enums.Cesit.Tatlı,AktifMi = true, OlusturmaZamani = DateTime.Now
+                        },
+                    };
+                    context.ExtraMalzemeler.AddRange(extras);
                 }
                 context.SaveChanges();
 

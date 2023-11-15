@@ -33,10 +33,13 @@ namespace Proje.UI
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddTransient(typeof(IAraTabloRepository<>), typeof(AraTabloRepository<>));
             builder.Services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
+            builder.Services.AddTransient(typeof(ISiparisRepository), typeof(SiparisRepository));
             builder.Services.AddTransient(typeof(IAraTabloService<>), typeof(AraTabloService<>));
             builder.Services.AddTransient(typeof(IMenuService),typeof(MenuService));
             builder.Services.AddTransient(typeof(ISepetService),typeof(SepetService));
             builder.Services.AddTransient(typeof(ISiparisMenulerService),typeof(SiparisMenulerService));
+            builder.Services.AddTransient(typeof(IExtraMalzemelerService),typeof(ExtraMalzemelerService));
+            builder.Services.AddTransient(typeof(IExtraMalzemelerSiparislerService),typeof(ExtraMalzemelerSiparislerService));
 
             builder.Services.AddAutoMapper(typeof(MenuMapProfile));
 
