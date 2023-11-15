@@ -35,6 +35,7 @@ namespace Proje.UI.Controllers
                 }
                 ViewBag.Uyarı = "Hatalı Onay Kodu!";
             }
+            ViewBag.Uyarı = "Hatalı Onay Kodu!";
             return View();
         }
     }

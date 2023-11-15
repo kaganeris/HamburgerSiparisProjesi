@@ -13,7 +13,7 @@ namespace Proje.BLL.Validations
         public LoginDTOValidator()
         {
             RuleFor(x => x.UserName).NotEmpty().WithMessage("Kullanıcı adı girmelisiniz!");
-            RuleFor(x => x.Password).NotEmpty().WithMessage("Şifre boş geçilemez!").MinimumLength(8).WithMessage("Şifre en az 8 karakterden oluşmalıdır!").Matches(@"[A-Z]+").WithMessage("Şifre en az 1 büyük harf içermelidir!").Matches(@"[a-z]+").WithMessage("Şifre en az 1 küçük harf içermelidir!");
+            RuleFor(x => x.Password).NotEmpty().WithMessage("Şifre boş geçilemez!");
         }
     }
 }

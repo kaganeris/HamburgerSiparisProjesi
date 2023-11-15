@@ -22,7 +22,7 @@ namespace Proje.UI.Areas.User.Controllers
 		SiparisOlusturDTO siparisOlusturDTO;
         MenuService menuService;
         private readonly UserManager<AppUser> userManager;
-
+        private readonly IExtraMalzemelerSiparislerService extraMalzemelerSiparislerService;
         SepetService sepetService;
         SiparisService siparisService;
         SiparisMenulerService siparisMenulerService;
@@ -30,7 +30,7 @@ namespace Proje.UI.Areas.User.Controllers
 
         private readonly ExtraMalzemelerService extraMalzemelerService;
 
-        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,ISiparisRepository baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository,AppDbContext context,UserManager<AppUser> userManager,IBaseRepository<ExtraMalzeme> baseRepository2)
+        public SiparisController(IBaseRepository<Menu> baseRepository,IBaseRepository<Sepet> _baseRepository,ISiparisRepository baseRepository1,IAraTabloRepository<SiparislerMenuler> araTabloRepository,AppDbContext context,UserManager<AppUser> userManager,IBaseRepository<ExtraMalzeme> baseRepository2,IExtraMalzemelerSiparislerService extraMalzemelerSiparislerService)
 
         {
             siparisService = new(baseRepository1);
@@ -40,9 +40,10 @@ namespace Proje.UI.Areas.User.Controllers
             extraMalzemelerService = new(baseRepository2);
 
             siparisOlusturDTO = new();
-            siparisOlusturDTO.Menuler = menuService.GetAll();
+            siparisOlusturDTO.Menuler = menuService.GetWhereAll(x => x.AktifMi == true);
             siparisOlusturDTO.ExtraMalzemeler= extraMalzemelerService.GetAll();
             this.userManager = userManager;
+            this.extraMalzemelerSiparislerService = extraMalzemelerSiparislerService;
         }
        
         public IActionResult SiparisOlustur()

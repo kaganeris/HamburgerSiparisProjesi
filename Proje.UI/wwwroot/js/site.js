@@ -40,8 +40,8 @@ function malzemeEkle(id) {
             
         }
 
-    });
-};
+    })
+}
 function SepettenSil(siparisID) {
     let sepetData={
         sepetID : siparisID
